@@ -1,9 +1,78 @@
-<h3>Raised Buttons</h3>
-<div class="button-row">
-  <button mat-raised-button>Basic</button>
-  <button mat-raised-button color="primary">Primary</button>
-  <button mat-raised-button color="accent">Accent</button>
-  <button mat-raised-button color="warn">Warn</button>
-  <button mat-raised-button disabled>Disabled</button>
-  <a mat-raised-button routerLink=".">Link</a>
+<div fxLayout="column" fxFill>
+  <!-- Custom screen window buttons -->
+  <div id="title-bar" fxLayout fxLayoutAlign="space-between center">
+    <div id="title">Nana Chat App</div>
+    <div id="title-bar-btns">
+      <button mat-icon-button>
+        <mat-icon aria-label="minimize">remove</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon aria-label="maximize">check_box_outline_blank</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon aria-label="smallsize">filter_none</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon aria-label="close">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Application content -->
+  <div fxLayout="column" fxFlex>
+
+    <!-- Toolbar -->
+    <mat-toolbar color="primary" id="app-header">
+      <mat-toolbar-row fxLayout fxLayoutAlign="space-between center">
+        <div id="logo-aria" fxLayout fxLayoutAlign="start center">
+          <button mat-icon-button>
+            <mat-icon aria-label="keyboard_backspace">keyboard_backspace</mat-icon>
+          </button>
+          <div id="logo-wrapper" fxLayout fxLayoutAlign="center center">
+            <img src="../assets/images/logo-lg.png" alt="Nana Customer Support">
+          </div>
+          <div id="app-info" fxHide.xs fxLayout="column" fxLayoutAlign="space-around">
+            <h1>Nana Customer Support</h1>
+            <p>Customer support chat</p>
+          </div>
+        </div>
+        <div id="user-aria">
+          <button mat-button [matMenuTriggerFor]="menu">
+            <div fxLayout fxLayoutAlign="center center" id="user-menu">
+              <div class="image-wrapper">
+                <img src="../assets/images/avatars/3.jpg" alt="user profile pic">
+              </div>
+              <div fxHide.xs id="user-menu-info">
+                <h1>
+                  <span>Eyad Farra</span>
+                  <mat-icon>arrow_drop_down</mat-icon>
+                </h1>
+                <p>eyadm.fa@gmail.com</p>
+              </div>
+            </div>
+          </button>
+          <mat-menu #menu="matMenu" overlapTrigger="false">
+            <button mat-menu-item color="primary">
+              <mat-icon>settings</mat-icon>
+              <span>Settings</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>power_settings_new</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <!-- Content -->
+    <div fxFlex>
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- Auto update message -->
+    <div id="auto-update-message">
+      auto update message
+    </div>
+  </div>
 </div>

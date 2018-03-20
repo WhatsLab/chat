@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+html, body{
+  height: 100%;
+  margin: 0;
+}
+
+.mat-toolbar.mat-primary, .mat-raised-button.mat-primary{
+  color: white !important;
+}
+
+.image-wrapper{
+  border-radius: 50%;
+  overflow: hidden;
+}
+.image-wrapper img{
+  width: 100%;
+}

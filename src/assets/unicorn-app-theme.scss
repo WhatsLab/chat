@@ -9,16 +9,22 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://www.google.com/design/spec/style/color.html
-$candy-app-primary: mat-palette($mat-green);
-$candy-app-accent:  mat-palette($mat-light-green);
+$osca-app-primary: mat-palette($mat-green);
+$osca-app-accent:  mat-palette($mat-light-green);
 
 // The warn palette is optional (defaults to red).
-$candy-app-warn:    mat-palette($mat-orange);
+$osca-app-warn:    mat-palette($mat-orange);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+$osca-app-theme: mat-light-theme($osca-app-primary, $osca-app-accent, $osca-app-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($candy-app-theme);
+
+
+
+$osca-app-theme: map-merge($osca-app-theme, (foreground: $mat-dark-theme-foreground));
+
+// Include your custom theme.
+@include angular-material-theme($osca-app-theme);

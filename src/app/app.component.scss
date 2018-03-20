@@ -1,0 +1,100 @@
+// Import theming functions
+@import '~@angular/material/theming';
+// Import your custom theme
+@import '../assets/unicorn-app-theme.scss';
+
+// Use mat-color to extract individual colors from a palette as necessary.
+// The hue can be one of the standard values (500, A400, etc.), one of the three preconfigured
+// hues (default, lighter, darker), or any of the aforementioned prefixed with "-contrast".
+// For example a hue of "darker-contrast" gives a light color to contrast with a "darker" hue.
+// Note that quotes are needed when using a numeric hue with the "-contrast" modifier.
+// Available color palettes: https://www.google.com/design/spec/style/color.html
+
+//.mat-toolbar {
+//  background-color: mat-color($candy-app-primary);
+//  border-color: mat-color($candy-app-accent, A400);
+//  color: mat-color($candy-app-primary, '100-contrast');
+//}
+
+
+#app-header .mat-toolbar-row{
+  height: 79pt;
+}
+
+#title-bar{
+  -webkit-app-region: drag;
+  background-color: rgb(35, 125, 72);
+}
+#title{
+  padding-left: 10pt;
+  color: #dfdfdf;
+  font-size: 9pt;
+}
+#title-bar-btns{
+  -webkit-app-region: no-drag;
+}
+#title-bar-btns .md-button{
+
+  margin: 0;
+}
+
+#title-bar-btns .md-button md-icon{
+  width: 10pt;
+  height: 10pt;
+  color: #dfdfdf;
+}
+#auto-update-message{
+  padding: 4pt 6pt;
+  font-size: 9pt;
+  color: gray;
+}
+
+
+#logo-wrapper{
+  margin: 0 2pt;
+}
+#logo-wrapper img{
+  width: 43pt;
+}
+#app-info{
+  padding: 10pt;
+}
+#app-info h1{
+  font-weight: bold;
+}
+#app-info p{
+  margin: 0;
+  font-size: 10pt;
+  padding-top: 2pt;
+}
+
+
+.user-menu{
+  padding: 5pt 0;
+}
+#user-menu .image-wrapper{
+  width: 43pt;
+  height: 43pt;
+  margin-right: 10pt;
+}
+#user-menu h1{
+  color: white;
+  font-weight: bold;
+  font-size: 11pt;
+}
+#user-menu h1 md-icon{
+  color: white;
+}
+#user-menu-info{
+  line-height: 14pt;
+}
+#user-menu p{
+  color: #94ce57;
+  font-size: 9pt;
+}
+#user-menu h1, #user-menu p{
+
+  text-transform: initial;
+  margin: 0;
+  text-align: left;
+}
