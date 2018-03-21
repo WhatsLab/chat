@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatIconModule, MatToolbarModule, MatMenuModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatIconModule, MatToolbarModule, MatMenuModule, MatTabsModule} from '@angular/material';
 import {NgxElectronModule} from 'ngx-electron';
 
 import {RouterModule, Routes} from '@angular/router';
@@ -13,42 +13,24 @@ import {MainComponent} from './main/main.component';
 import { BlankComponent } from './blank/blank.component';
 import { ChatComponent } from './chat/chat.component';
 
-const appRoutes: Routes = [
-  {
-    path: 'main',
-    component: MainComponent,
-    data: {
-      title: 'Heroes List'
-    },
-    children: [
-      {
-        path: 'blank',
-        component: BlankComponent
-      },
-      {
-        path: 'chat',
-        component: ChatComponent
-      },
-      {
-        path: '',
-        redirectTo: '/main/blank',
-        pathMatch: 'full'
-      }
-    ]
-  },
-  {
-    path: '',
-    redirectTo: '/main',
-    pathMatch: 'full'
-  }
-];
+import {appRoutes} from './app.routes';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { LoginComponent } from './login/login.component';
+import { ConversationsComponent } from './conversations/conversations.component';
+import { ContactsComponent } from './contacts/contacts.component';
+import { GroupsComponent } from './groups/groups.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     BlankComponent,
-    ChatComponent
+    ChatComponent,
+    SidebarComponent,
+    LoginComponent,
+    ConversationsComponent,
+    ContactsComponent,
+    GroupsComponent
   ],
   imports: [
     BrowserModule,
@@ -57,12 +39,13 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
+    MatTabsModule,
     MatToolbarModule,
     FlexLayoutModule,
     MatMenuModule,
     RouterModule.forRoot(
       appRoutes,
-      {enableTracing: true} // <-- debugging purposes only
+      {enableTracing: false} // <-- debugging purposes only
     )
   ],
   providers: [],
