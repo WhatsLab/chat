@@ -1,25 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {MatTabChangeEvent} from '@angular/material';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
+  encapsulation: ViewEncapsulation.None // <------
 })
 export class SidebarComponent implements OnInit  {
 
   tabs = [
     {
       'path': 'conversations',
-      'label': 'Conversations'
+      'label': 'Conversations',
+      'icon': 'chat'
     },
     {
       'path': 'contacts',
-      'label': 'Contacts'
-    },
-    {
-      'path': 'groups',
-      'label': 'Groups'
+      'label': 'Contacts',
+      'icon': 'contacts'
     }
   ];
 
@@ -28,7 +27,8 @@ export class SidebarComponent implements OnInit  {
   ngOnInit() {
   }
 
-  selectedTabChange(_matTabChangeEvent: MatTabChangeEvent) {
-    console.log(_matTabChangeEvent);
+  selectedTabChange(event: MatTabChangeEvent) {
+    console.log('index => ', event.index);
+    console.log('tab => ', event.tab);
   }
 }

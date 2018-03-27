@@ -1,23 +1,26 @@
-<div fxLayout="column" fxFill fxLayoutAlign="space-between">
+<div fxFill>
 
-  <mat-tab-group class="demo-tab-group"
-                 fxFill
+  <mat-tab-group fxFill class="tab-group"
+                 backgroundColor="green"
                  headerPosition="below"
-                 fxLayout="column"
-                 (selectedTabChange)="selectedTabChange()">
+                 disableRipple="false"
+                 (selectedTabChange)="selectedTabChange($event)">
 
-    <mat-tab [label]="link.label" *ngFor="let link of tabs" fxFill>
+    <mat-tab fxLayout="column" [label]="link.label" *ngFor="let link of tabs" fxFill class="border-top">
 
       <ng-template mat-tab-label>
-        <div fxLayout="column" fxLayoutAlign="center center">
-          <mat-icon>security</mat-icon>
+        <div fxLayout="column" fxLayoutAlign="space-arround center">
+          <mat-icon>{{link.icon}}</mat-icon>
           <span>
             {{link.label}}
           </span>
         </div>
       </ng-template>
 
-      <div class="demo-tab-content">
+      <div  class="demo-tab-content">
+
+
+
         {{link.label}}
       </div>
 

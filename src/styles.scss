@@ -1,4 +1,7 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /* You can add global styles to this file, and also import other style files */
+@import 'assets/colors.scss';
+
 html, body{
   height: 100%;
   margin: 0;
@@ -15,10 +18,20 @@ html, body{
 .image-wrapper img{
   width: 100%;
 }
+%top-border {
+  border-top: 1px solid $sections-border-color  !important;
+}
+%right-border {
+  border-right: 1px solid $sections-border-color !important;
+}
 
 .top-border{
-  border-top: 1px solid #e1e1e1;
+  @extend %top-border;
 }
 .right-border{
-  border-right: 1px solid #e1e1e1;
+  @extend %right-border;
 }
+
+
+
+
