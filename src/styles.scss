@@ -24,6 +24,10 @@ html, body{
 %right-border {
   border-right: 1px solid $sections-border-color !important;
 }
+%has-padding {
+  padding: 10pt;
+  box-sizing: border-box;
+}
 
 .top-border{
   @extend %top-border;
@@ -32,6 +36,10 @@ html, body{
   @extend %right-border;
 }
 
+
+.has-padding{
+  @extend %has-padding;
+}
 
 
 

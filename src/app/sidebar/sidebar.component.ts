@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MatTabChangeEvent} from '@angular/material';
 
 @Component({
@@ -7,7 +7,7 @@ import {MatTabChangeEvent} from '@angular/material';
   styleUrls: ['./sidebar.component.scss'],
   encapsulation: ViewEncapsulation.None // <------
 })
-export class SidebarComponent implements OnInit  {
+export class SidebarComponent implements OnInit {
 
   tabs = [
     {
@@ -21,14 +21,20 @@ export class SidebarComponent implements OnInit  {
       'icon': 'contacts'
     }
   ];
+  selectedTab = this.tabs[0]['label'];
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
   selectedTabChange(event: MatTabChangeEvent) {
+
+
+    this.selectedTab = event.tab.textLabel;
+
     console.log('index => ', event.index);
-    console.log('tab => ', event.tab);
+    console.log('tab => ', event.tab.textLabel);
   }
 }

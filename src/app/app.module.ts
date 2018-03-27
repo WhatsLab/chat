@@ -3,7 +3,17 @@ import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatIconModule, MatToolbarModule, MatMenuModule, MatTabsModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatMenuModule,
+  MatTabsModule,
+  MatInputModule,
+  MatFormFieldModule
+} from '@angular/material';
+
 import {NgxElectronModule} from 'ngx-electron';
 
 import {RouterModule, Routes} from '@angular/router';
@@ -41,6 +51,8 @@ import { GroupsComponent } from './groups/groups.component';
     MatIconModule,
     MatTabsModule,
     MatToolbarModule,
+    MatInputModule,
+    MatFormFieldModule,
     FlexLayoutModule,
     MatMenuModule,
     RouterModule.forRoot(

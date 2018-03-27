@@ -11,6 +11,7 @@
 .tab-group .mat-tab-label{
   color: $tab-label-color;
   height: 68pt;
+  flex: 1;
 }
 .tab-group .mat-tab-label.mat-tab-label-active{
   color: $active-tab-label-color;
@@ -30,4 +31,12 @@
 
 .tab-group .mat-tab-header{
   @extend %top-border;
+}
+
+#sidebar{
+  min-width: 300pt !important;
+}
+
+.tab-group .demo-tab-content{
+  @extend %has-padding;
 }

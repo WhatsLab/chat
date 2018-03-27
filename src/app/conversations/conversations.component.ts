@@ -10,6 +10,7 @@ export class ConversationsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('Conversation init');
   }
 
 }

@@ -1,6 +1,12 @@
-<div fxFill>
+<div fxFill id="sidebar" fxLayout="column">
 
-  <mat-tab-group fxFill class="tab-group"
+  <form action="" class="has-padding">
+    <mat-form-field floatLabel="never" fxLayout>
+      <input fxFill matInput type="search" placeholder="Search for Coversation..." >
+    </mat-form-field>
+  </form>
+
+  <mat-tab-group fxFlex class="tab-group"
                  backgroundColor="green"
                  headerPosition="below"
                  disableRipple="false"
@@ -16,13 +22,13 @@
           </span>
         </div>
       </ng-template>
-
       <div  class="demo-tab-content">
-
-
-
-        {{link.label}}
+        <app-conversations *ngIf="selectedTab === 'Conversations'"></app-conversations>
+        <app-contacts *ngIf="selectedTab === 'Contacts'"></app-contacts>
       </div>
+      <!--<div  class="demo-tab-content">-->
+        <!--{{link.label}}-->
+      <!--</div>-->
 
     </mat-tab>
 
