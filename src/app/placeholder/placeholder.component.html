@@ -1,0 +1,24 @@
+<div [ngSwitch]="screen">
+  <div *ngSwitchCase="'conversations'">
+    <div fxLayout class="content-placeholder" *ngFor="let i of [1, 2, 3, 4, 5, 6]">
+      <div class="animated-background logo"></div>
+      <div fxFlex class="content" fxLayout="row wrap">
+        <div class="animated-background title" fxFlex="30"></div>
+        <div class="animated-background subtitle" fxFlex="100"></div>
+        <div class="animated-background subtitle" fxFlex="40"></div>
+      </div>
+    </div>
+  </div>
+  <div *ngSwitchDefault>
+    <div fxLayout class="content-placeholder style2" *ngFor="let i of [1, 2, 3, 4, 5, 6]">
+      <div class="animated-background logo"></div>
+      <div fxFlex class="content" fxLayout="row wrap">
+        <div class="animated-background title" fxFlex="60"></div>
+        <div class="animated-background subtitle" fxFlex="50"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

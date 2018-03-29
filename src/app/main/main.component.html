@@ -3,8 +3,11 @@
   <!-- Left side including search and tabs sections-->
   <app-sidebar class="right-border"></app-sidebar>
 
-  <!-- This will inject page may be one of the [chatting, order details, customer details]-->
-  <router-outlet fxLayout fxFlex></router-outlet>
+  <!-- This will inject page may be one of the [Conversation, order details, customer details]-->
+  <div fxLayout="column" fxFlex fxLayoutAlign="start stretch">
+    <router-outlet></router-outlet>
+  </div>
+
 </div>
 
 

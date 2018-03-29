@@ -29,6 +29,7 @@ import { LoginComponent } from './login/login.component';
 import { ConversationsComponent } from './conversations/conversations.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { GroupsComponent } from './groups/groups.component';
+import { PlaceholderComponent } from './placeholder/placeholder.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { GroupsComponent } from './groups/groups.component';
     LoginComponent,
     ConversationsComponent,
     ContactsComponent,
-    GroupsComponent
+    GroupsComponent,
+    PlaceholderComponent
   ],
   imports: [
     BrowserModule,

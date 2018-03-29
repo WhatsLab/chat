@@ -1,0 +1,67 @@
+@keyframes placeHolderShimmer{
+  0%{
+    background-position: -468px 0
+  }
+  100%{
+    background-position: 468px 0
+  }
+}
+
+.animated-background {
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 96px;
+  position: relative;
+}
+
+.content-placeholder.style2{
+  border-bottom: 1px solid #e1e1e1;
+}
+.content-placeholder{
+  padding: 10pt;
+}
+.content-placeholder.style2{
+
+}
+.content-placeholder .logo{
+  width: 40pt;
+  height: 40pt;
+  border-radius: 50%;
+  margin-right: 10pt;
+}
+.content-placeholder .button{
+  width: 120pt;
+  height: 32pt;
+}
+.content-placeholder.style2 .logo{
+  width: 30pt;
+  height: 30pt;
+  margin-right: 5pt;
+}
+.content-placeholder .title{
+  height: 10pt;
+  margin-bottom: 7pt;
+}
+.content-placeholder .title.fix{
+  width: 100pt;
+}
+.content-placeholder.style2 .subtitle {
+  height: 8pt;
+  margin-bottom: 0;
+}
+.content-placeholder .subtitle.fix {
+  width: 50pt;
+}
+
+.content-placeholder .subtitle{
+  height: 6pt;
+  margin-bottom: 7pt;
+}
+
+
