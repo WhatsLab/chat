@@ -20,16 +20,17 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
-import { BlankComponent } from './blank/blank.component';
-import { ChatComponent } from './chat/chat.component';
+import {BlankComponent} from './blank/blank.component';
+import {ChatComponent} from './chat/chat.component';
 
 import {appRoutes} from './app.routes';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { LoginComponent } from './login/login.component';
-import { ConversationsComponent } from './conversations/conversations.component';
-import { ContactsComponent } from './contacts/contacts.component';
-import { GroupsComponent } from './groups/groups.component';
-import { PlaceholderComponent } from './placeholder/placeholder.component';
+import {SidebarComponent} from './sidebar/sidebar.component';
+import {LoginComponent} from './login/login.component';
+import {ConversationsComponent} from './conversations/conversations.component';
+import {ContactsComponent} from './contacts/contacts.component';
+import {GroupsComponent} from './groups/groups.component';
+import {PlaceholderComponent} from './placeholder/placeholder.component';
+import {RequestService} from './request.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,9 @@ import { PlaceholderComponent } from './placeholder/placeholder.component';
       {enableTracing: false} // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [
+    RequestService
+  ],
   bootstrap: [
     AppComponent
   ]

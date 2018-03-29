@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostBinding, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-blank',
@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blank.component.scss']
 })
 export class BlankComponent implements OnInit {
+  @HostBinding('class') class = 'display-flex';
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

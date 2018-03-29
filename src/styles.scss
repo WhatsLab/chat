@@ -41,5 +41,7 @@ html, body{
   @extend %has-padding;
 }
 
-
+.display-flex{
+  flex: 1;
+}
 

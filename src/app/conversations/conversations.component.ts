@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {RequestService} from '../request.service';
+
 
 @Component({
   selector: 'app-conversations',
@@ -7,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConversationsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private Request: RequestService) {
+  }
 
   ngOnInit() {
-    console.log('Conversation init');
+    const data = {};
+    this.Request.call({
+      'url': '/conversations',
+      'method': 'GET',
+      'data': data,
+      'expected_result': 1
+    }, res => {
+      console.log(res);
+    });
   }
 
 }
