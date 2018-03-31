@@ -9,19 +9,22 @@ import {RequestService} from '../request.service';
 })
 export class ConversationsComponent implements OnInit {
 
+  loading = false;
   constructor(private Request: RequestService) {
+
   }
 
   ngOnInit() {
-    const data = {};
-    this.Request.call({
-      'url': '/conversations',
-      'method': 'GET',
-      'data': data,
-      'expected_result': 1
-    }, res => {
-      console.log(res);
-    });
+    console.log(11);
+    // const data = {'eyad': 'hi'};
+    // this.Request.call({
+    //   'url': '/conversations',
+    //   'method': 'GET',
+    //   'data': data,
+    //   'force_result': 1
+    // }, res => {
+    //   console.log(res);
+    // });
   }
 
 }

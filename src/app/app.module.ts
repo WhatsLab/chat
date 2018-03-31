@@ -11,12 +11,14 @@ import {
   MatMenuModule,
   MatTabsModule,
   MatInputModule,
+  MatListModule,
   MatFormFieldModule
 } from '@angular/material';
 
 import {NgxElectronModule} from 'ngx-electron';
 
 import {RouterModule, Routes} from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
@@ -31,6 +33,7 @@ import {ContactsComponent} from './contacts/contacts.component';
 import {GroupsComponent} from './groups/groups.component';
 import {PlaceholderComponent} from './placeholder/placeholder.component';
 import {RequestService} from './request.service';
+import { DinamicTabContenx[x[x[x[x[x[x[x[x[+X[Component } from './dinamic-tab-contenx-[x-[x-[x-[x-[x-[x-[x-[x-[+-x-[/dinamic-tab-contenx-[x-[x-[x-[x-[x-[x-[x-[x-[+-x-[.component';
 
 @NgModule({
   declarations: [
@@ -40,10 +43,11 @@ import {RequestService} from './request.service';
     ChatComponent,
     SidebarComponent,
     LoginComponent,
+    GroupsComponent,
+    PlaceholderComponent,
     ConversationsComponent,
     ContactsComponent,
-    GroupsComponent,
-    PlaceholderComponent
+    DinamicTabContenx[x[x[x[x[x[x[x[x[+X[Component
   ],
   imports: [
     BrowserModule,
@@ -53,11 +57,13 @@ import {RequestService} from './request.service';
     MatCheckboxModule,
     MatIconModule,
     MatTabsModule,
+    MatListModule,
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
     FlexLayoutModule,
     MatMenuModule,
+    HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false} // <-- debugging purposes only

@@ -1,3 +1,17 @@
 <div fxFill>
-  <app-placeholder [data]="'conversations'"></app-placeholder>
+  <app-placeholder *ngIf="loading" [data]="'conversations'"></app-placeholder>
+
+  <mat-list role="list">
+    <mat-list-item role="listitem">
+      <a mat-button>
+        <mat-icon matListIcon>folder</mat-icon>
+        <h3 matLine> eyadfarra </h3>
+        <p matLine>
+          <span> hi </span>
+          <span class="demo-2"> -- how are you </span>
+        </p>
+
+      </a>
+    </mat-list-item>
+  </mat-list>
 </div>

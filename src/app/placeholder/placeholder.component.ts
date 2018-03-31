@@ -11,6 +11,7 @@ export class PlaceholderComponent implements OnInit {
   screen = 'conversations';
 
   constructor() {
+    console.log('placing content ...');
   }
 
   ngOnInit() {

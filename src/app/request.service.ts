@@ -1,201 +1,165 @@
 import {Injectable} from '@angular/core';
 import * as CONSTANTS from './constants';
+import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class RequestService {
 
-  constructor() {
+  private is_debug = true;
+  private success = true;
+  private original_transport;
+  private original_method;
+  private original_url;
+  private original_data;
+  private allowed_transports = ['websocket', 'http'];
+  private allowed_methods = ['get', 'post', 'delete', 'put'];
+
+  constructor(private http: HttpClient) {
+  }
+
+  errorResponse(error, callback) {
+    const result = {
+      'success': error.ok,
+      'result': error.body
+    };
+
+    if (this.is_debug) {
+      this.debug(error.status, result);
+    }
+
+    callback(result);
+  }
+
+  successResponse(res, callback) {
+    const result = {
+      'success': res.ok,
+      'result': res.body
+    };
+
+    if (this.is_debug) {
+      this.debug(res.status, result);
+    }
+
+    callback(result);
+  }
+
+  debug(status, response) {
+    console.log(
+      status,
+      this.original_transport,
+      this.original_method,
+      this.original_url,
+      this.original_data,
+      response
+    );
   }
 
   call(params, cb) {
 
-    const callback = data => {
+    const callback = output => {
       if (typeof cb === 'function') {
-        cb(data);
+        cb(output);
       }
     };
 
-    const success = true;
-    const doRequest = () => {
+    const {url, method = 'get', data, force_result, is_absolute_url} = params;
 
-      const is_debug = true,
-        allowed_transports = ['websocket', 'http'],
-        allowed_methods = ['get', 'post', 'delete', 'put'],
-        {method = 'GET', data, expected_status = 1, is_absolute_url} = params;
+    let {transport} = params;
 
-      let {url, transport} = params;
+    if (
+      !url
+    ) {
+      return callback({
+        'success': !this.success,
+        'result': {
+          'message': 'Request: Url is required !'
+        }
+      });
+    }
 
-      if (
-        !url
-      ) {
-        return callback({
-          'success': !success,
-          'result': {
-            'message': 'Request: Url is required !'
-          }
-        });
-      }
+    if (
+      !method ||
+      this.allowed_methods.indexOf(method.toLowerCase()) === -1
+    ) {
+      return callback({
+        'success': !this.success,
+        'result': {
+          'message': 'Request: Method is required !'
+        }
+      });
+    }
 
-      if (
-        !method ||
-        allowed_methods.indexOf(method.toLowerCase()) === -1
-      ) {
-        return callback({
-          'success': !success,
-          'result': {
-            'message': 'Request: Method is required !'
-          }
-        });
-      }
+    if (
+      !transport ||
+      this.allowed_transports.indexOf(transport.toLowerCase()) === -1
+    ) {
+      transport = 'http';
+    }
 
-      if (
-        !transport ||
-        allowed_transports.indexOf(transport.toLowerCase()) === -1
-      ) {
-        transport = 'http';
-      }
-
-      const original_transport = transport.toUpperCase(),
-        original_method = method.toUpperCase(),
-        original_url = is_absolute_url ? url : CONSTANTS.API_URL['development'] + url,
-        original_data = data ? {...data} : {};
+    this.original_transport = transport.toUpperCase();
+    this.original_method = method.toUpperCase();
+    this.original_data = data ? {...data} : {};
 
 
-      if (expected_status !== undefined) {
+    if (force_result !== undefined) {
+      this.original_url = CONSTANTS.MOCK_SERVER['URL'] + url;
+    } else {
+      this.original_url = is_absolute_url ? url : CONSTANTS.API_URL['development'] + url;
+    }
+
+
+    if (transport === 'http') {
+
+
+      const options = {
+        method: method.toLowerCase(),
+        data
+      };
+
+      if (force_result !== undefined) {
         const expected_statuses = {
           '-1': 'ERROR',
           '0': 'EMPTY',
           '1': 'EXISTS'
         };
 
-        if (url.startsWith('/')) {
-          url = url.replace('/', '');
-        }
+        const selected_status = expected_statuses[force_result || 1].toLowerCase();
+        options['url'] = `${this.original_url}_${selected_status}`;
 
-        const selected_status = expected_statuses[expected_status],
-          local_url = `_${method.toUpperCase()}_${url}_${selected_status}.json`,
-          _success = selected_status !== 'ERROR',
-          status = _success ? 200 : 500,
-          response = {
-            _success,
-            'result': require(`./src/renderer/templates/expected_responses/${local_url}`)
-          };
-
-        setTimeout(() => {
-          if (is_debug) {
-            debug(status, response);
-          }
-          callback(response);
-        }, 2000);
-
-      } else if (transport === 'http') {
-
-        const token = ''; // AUTH.token();
-        const headers = {
-          'Content-Type': 'application/json'
-          // 'Content-Type': 'application/x-www-form-urlencoded'
-        };
-
-        if (token) {
-          headers['Authorization'] = token;
-        }
-
-        const options = {
-          'url': original_url,
-          method,
-          data,
-          headers
-        };
-
-        if (method.toUpperCase() === 'GET') {
-          options['params'] = options.data;
-          delete options.data;
-        }
-
-        // $http(
-        //   options
-        // ).then(
-        //   response => {
-        //     let {
-        //       data: {
-        //         success,
-        //         result = {}
-        //       },
-        //       status
-        //     } = response;
-        //
-        //     if (is_debug) {
-        //       debug(status, {
-        //         success,
-        //         result
-        //       });
-        //     }
-        //
-        //     callback({
-        //       success,
-        //       result
-        //     });
-        //
-        //   }
-        // ).catch(
-        //   response => {
-        //     const {
-        //       status,
-        //       data = {}
-        //     } = response;
-        //
-        //     let {result = {}} = data;
-        //     const success = false;
-        //     let {message = 'Error while requesting'} = result;
-        //
-        //     switch (status) {
-        //       case  -1 :
-        //         message = 'Server is down';
-        //         break;
-        //       case  404 :
-        //         message = 'Url is not found';
-        //         break;
-        //     }
-        //
-        //     result = {
-        //       message
-        //     };
-        //
-        //     if (is_debug) {
-        //       debug(status, {
-        //         success,
-        //         result
-        //       });
-        //     }
-        //
-        //     callback({
-        //       success,
-        //       result
-        //     });
-        //   }
-        // );
       } else {
-        return callback({
-          'success': !success,
-          'result': 'SocketIO not implemented yet'
-        });
+        options['url'] = this.original_url;
       }
 
-      const debug = (status, response) => {
-        console.log(
-          status,
-          original_transport,
-          original_method,
-          original_url,
-          original_data,
-          response
-        );
-      };
+      let headers = new HttpHeaders();
+      headers = headers.append('Content-Type', 'application/json');
+      const token = ''; // AUTH.token();
+      if (token) {
+        headers = headers.append('Authorization', token);
+      }
 
+      if (options.method === 'get') {
+        let search = new HttpParams();
+        for (const key in options.data) {
+          if (options.data[key]) {
+            search = search.set(key, options.data[key]);
+          }
+        }
+        this.http.get(options['url'], {headers, 'params': search, 'observe': 'response'}).subscribe(res => {
+            this.successResponse(res, callback);
+          },
+          error => {
+            this.errorResponse(error, callback);
+          });
+      } else if (options.method === 'post') {
+        this.http.post(options['url'], options.data, {headers, 'observe': 'response'}).subscribe(res => console.log(res));
+      }
+    } else {
+      return callback({
+        'success': !this.success,
+        'result': 'SocketIO not implemented yet'
+      });
+    }
 
-    };
-
-    doRequest();
 
   }
 

@@ -3,7 +3,7 @@
   <form action="" class="has-padding">
     <mat-form-field floatLabel="never" fxLayout>
 
-      <input matInput type="search" placeholder="Search for Conversation..." >
+      <input matInput type="search" placeholder="Search for Conversation...">
       <span matPrefix>
         <mat-icon>search</mat-icon>
       </span>
@@ -13,26 +13,27 @@
   <mat-tab-group fxFlex class="tab-group"
                  backgroundColor="green"
                  headerPosition="below"
-                 disableRipple="false"
                  (selectedTabChange)="selectedTabChange($event)">
 
-    <mat-tab fxLayout="column" [label]="link.label" *ngFor="let link of tabs" fxFill class="border-top">
+
+    <mat-tab fxLayout="column" [label]="link.label" *ngFor="let link of tabs; let first = first;" fxFill class="border-top">
 
       <ng-template mat-tab-label>
-        <div fxLayout="column" fxLayoutAlign="space-arround center">
+        <div fxLayout="column" fxLayoutAlign="space-around center">
           <mat-icon>{{link.icon}}</mat-icon>
           <span>
             {{link.label}}
           </span>
         </div>
       </ng-template>
-      <div  class="demo-tab-content">
-        <app-conversations *ngIf="selectedTab === 'Conversations'"></app-conversations>
-        <app-contacts *ngIf="selectedTab === 'Contacts'"></app-contacts>
+      <div class="demo-tab-content">
+        <div *ngIf="first && selectedTab == 'Conversations'">
+          <app-conversations></app-conversations>
+        </div>
+        <div *ngIf="!first && selectedTab == 'Contacts'">
+          <app-contacts></app-contacts>
+        </div>
       </div>
-      <!--<div  class="demo-tab-content">-->
-        <!--{{link.label}}-->
-      <!--</div>-->
 
     </mat-tab>
 
