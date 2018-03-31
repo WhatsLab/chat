@@ -3,22 +3,13 @@ import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatIconModule,
-  MatToolbarModule,
-  MatMenuModule,
-  MatTabsModule,
-  MatInputModule,
-  MatListModule,
-  MatFormFieldModule
-} from '@angular/material';
+
 
 import {NgxElectronModule} from 'ngx-electron';
 
 import {RouterModule, Routes} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import {MaterialComponentsModule} from './material-components/material-components.module'
 
 import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
@@ -49,18 +40,10 @@ import {RequestService} from './request.service';
   ],
   imports: [
     BrowserModule,
+    MaterialComponentsModule,
     NgxElectronModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatTabsModule,
-    MatListModule,
-    MatToolbarModule,
-    MatInputModule,
-    MatFormFieldModule,
     FlexLayoutModule,
-    MatMenuModule,
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes,

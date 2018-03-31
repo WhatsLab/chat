@@ -7,6 +7,10 @@ html, body{
   margin: 0;
 }
 
+.scroll{
+  overflow-y: auto;
+}
+
 .mat-toolbar.mat-primary, .mat-raised-button.mat-primary{
   color: white !important;
 }
@@ -24,9 +28,27 @@ html, body{
 %right-border {
   border-right: 1px solid $sections-border-color !important;
 }
+%bottom-border {
+  border-bottom: 1px solid $sections-border-color !important;
+}
 %has-padding {
   padding: 10pt;
   box-sizing: border-box;
+}
+
+%zero-margin{
+  margin: 0;
+}
+
+%badge-icon {
+  width: 18pt;
+  height: 18pt;
+  display: inline-block;
+  background-color: #74bf21;
+  color: white;
+  text-align: center;
+  font-style: normal;
+  border-radius: 50%;
 }
 
 .top-border{

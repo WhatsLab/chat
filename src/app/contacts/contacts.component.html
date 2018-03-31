@@ -1,3 +1,26 @@
-<div fxFill>
-  <app-placeholder [data]="'contacts'"></app-placeholder>
+<div fxFill  fxLayout="column" fxLayoutAlign="space-between">
+  <div fxFlex class="scroll">
+    <app-placeholder [data]="'contacts'"></app-placeholder>
+    <ul class="tab-list style-2">
+      <li fxLayout *ngFor="let i of [0,1,2,3,4,5]; let first = first">
+        <a mat-button fxFlex>
+          <div class="item-content" fxLayout fxLayoutAlign="start center">
+            <div class="image-wrapper">
+              <img src="../../assets/images/avatars/2.jpg" alt="">
+            </div>
+            <div class="item-info" fxFlex>
+              <div class="basic">
+                <h3>Louise Day</h3>
+                <p>
+                  <span></span>
+                  <span>eyadm.fa@gmail.com</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <mat-progress-bar mode="query"></mat-progress-bar>
 </div>

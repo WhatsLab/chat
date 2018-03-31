@@ -26,11 +26,11 @@
           </span>
         </div>
       </ng-template>
-      <div class="demo-tab-content">
-        <div *ngIf="first && selectedTab == 'Conversations'">
+      <div class="demo-tab-content" fxFill>
+        <div fxFill *ngIf="first && selectedTab == 'Conversations'">
           <app-conversations></app-conversations>
         </div>
-        <div *ngIf="!first && selectedTab == 'Contacts'">
+        <div fxFill *ngIf="!first && selectedTab == 'Contacts'">
           <app-contacts></app-contacts>
         </div>
       </div>

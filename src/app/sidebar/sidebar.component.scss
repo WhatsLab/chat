@@ -69,3 +69,52 @@
 #sidebar .mat-icon{
   color: #979797;
 }
+
+
+.tab-list{
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.tab-list li{}
+.tab-list li a{
+  padding: 10pt;
+}
+.tab-list.style-2 li a{
+  @extend %bottom-border;
+  padding: 6pt 10pt;
+}
+.tab-list li a .item-content{}
+.tab-list li a .item-content .image-wrapper{
+  width: 40pt;
+  height: 40pt;
+  margin-right: 10pt;
+}
+.tab-list.style-2 li a .item-content .image-wrapper{
+  width: 30pt;
+  height: 30pt;
+}
+.tab-list li a .item-content .image-wrapper img{}
+.tab-list li a .item-content .item-info{
+  text-align: left;
+  line-height: 19pt;
+}
+.tab-list li a .item-content .item-info .basic h3{
+  @extend %zero-margin;
+  font-size: 11pt;
+}
+.tab-list li a .item-content .item-info .basic p{
+  @extend %zero-margin;
+  color: $gray-color;
+  font-size: 10pt;
+}
+.tab-list li a .item-content .item-info .basic p span{}
+.tab-list li a .item-content .item-info .extra{
+  text-align: center;
+}
+.tab-list li a .item-content .item-info .extra span{
+  color: $gray-color;
+}
+.tab-list li a .item-content .item-info .extra em{
+  @extend %badge-icon;
+}
