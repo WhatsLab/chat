@@ -33,7 +33,6 @@ import {ContactsComponent} from './contacts/contacts.component';
 import {GroupsComponent} from './groups/groups.component';
 import {PlaceholderComponent} from './placeholder/placeholder.component';
 import {RequestService} from './request.service';
-import { DinamicTabContenx[x[x[x[x[x[x[x[x[+X[Component } from './dinamic-tab-contenx-[x-[x-[x-[x-[x-[x-[x-[x-[+-x-[/dinamic-tab-contenx-[x-[x-[x-[x-[x-[x-[x-[x-[+-x-[.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +45,7 @@ import { DinamicTabContenx[x[x[x[x[x[x[x[x[+X[Component } from './dinamic-tab-co
     GroupsComponent,
     PlaceholderComponent,
     ConversationsComponent,
-    ContactsComponent,
-    DinamicTabContenx[x[x[x[x[x[x[x[x[+X[Component
+    ContactsComponent
   ],
   imports: [
     BrowserModule,
