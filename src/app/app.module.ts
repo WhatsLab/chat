@@ -24,6 +24,7 @@ import {ContactsComponent} from './contacts/contacts.component';
 import {GroupsComponent} from './groups/groups.component';
 import {PlaceholderComponent} from './placeholder/placeholder.component';
 import {RequestService} from './request.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {RequestService} from './request.service';
     GroupsComponent,
     PlaceholderComponent,
     ConversationsComponent,
-    ContactsComponent
+    ContactsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

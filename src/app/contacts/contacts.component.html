@@ -1,5 +1,6 @@
 <div fxFill  fxLayout="column" fxLayoutAlign="space-between">
   <div fxFlex class="scroll">
+    <app-not-found [type]="'contacts'"></app-not-found>
     <app-placeholder [data]="'contacts'"></app-placeholder>
     <ul class="tab-list style-2">
       <li fxLayout *ngFor="let i of [0,1,2,3,4,5]; let first = first">

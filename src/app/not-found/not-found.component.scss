@@ -1,0 +1,23 @@
+.not-found-message{
+  padding: 20pt 0;
+  box-sizing: border-box;
+  max-width: 220pt !important;
+  margin: 0 auto;
+}
+.not-found-message .mat-icon{
+  font-size: 44pt;
+  width: 44pt;
+  height: 50pt;
+}
+.not-found-message h3{
+  margin: 0;
+  font-size: 11pt;
+  color: #6d6d6d;
+  margin-top: 10pt;
+}
+.not-found-message p{
+  margin: 0;
+  font-size: 10pt;
+  color: #6d6d6d;
+  margin-top: 10pt;
+}
