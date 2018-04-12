@@ -8,8 +8,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxElectronModule} from 'ngx-electron';
 
 import {RouterModule, Routes} from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import {MaterialComponentsModule} from './material-components/material-components.module'
+import {HttpClientModule} from '@angular/common/http';
+import {MaterialComponentsModule} from './material-components/material-components.module';
 
 import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
@@ -24,7 +24,11 @@ import {ContactsComponent} from './contacts/contacts.component';
 import {GroupsComponent} from './groups/groups.component';
 import {PlaceholderComponent} from './placeholder/placeholder.component';
 import {RequestService} from './request.service';
-import { NotFoundComponent } from './not-found/not-found.component';
+import {NotFoundComponent} from './not-found/not-found.component';
+import {AngularFirestoreModule} from 'angularfire2/firestore';
+import {AngularFireModule} from 'angularfire2';
+import {environment} from '../environments/environment';
+import { DatetimeAgoDirective } from './datetime-ago.directive';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     PlaceholderComponent,
     ConversationsComponent,
     ContactsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DatetimeAgoDirective
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false} // <-- debugging purposes only
-    )
+    ),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // for firestore
+    // AngularFirestoreModule.enablePersistence() // <--- update this line for enable offline Data
   ],
   providers: [
     RequestService

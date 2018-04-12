@@ -1,25 +1,32 @@
-<div fxFill  fxLayout="column" fxLayoutAlign="space-between">
+<div fxFill fxLayout="column" fxLayoutAlign="space-between">
   <div fxFlex class="scroll">
     <app-not-found [type]="'conversations'"></app-not-found>
     <app-placeholder [data]="'conversations'"></app-placeholder>
     <ul class="tab-list">
-      <li fxLayout *ngFor="let i of [0,1,2,3,4,5]; let first = first">
+      <li fxLayout *ngFor="let con of conversations | async">
         <a mat-button fxFlex>
           <div class="item-content" fxLayout fxLayoutAlign="start center">
             <div class="image-wrapper">
-              <img src="../../assets/images/avatars/1.jpg" alt="">
+              <img src="../../assets/images/avatars/2.jpg" alt="">
             </div>
             <div class="item-info" fxFlex fxLayout fxLayoutAlign="space-between center">
               <div class="basic">
-                <h3>Mollie Rodgers</h3>
+                <h3 [ngSwitch]="con.conversation.type">
+                  <span *ngSwitchCase="'single'">
+                    {{con.conversation.singleMeta ? con.conversation.singleMeta.name.first + ' ' + con.conversation.singleMeta.name.last : ''}}
+                  </span>
+                  <span *ngSwitchCase="'group'">
+                    {{con.conversation.groupMeta ? con.conversation.groupMeta.name : ''}}
+                  </span>
+                </h3>
                 <p>
                   <span></span>
-                  <span>Can you send me the cient presso ...</span>
+                  <span>{{con.conversation.lastMessage ?  con.conversation.lastMessage.content : ''}}</span>
                 </p>
               </div>
-              <div class="extra" fxLayout="column" fxLayoutAlign="center center">
-                <span>1 min</span>
-                <em>2</em>
+              <div class="extra" fxLayout="column" fxLayoutAlign="center end">
+                <span *ngIf="con.conversation.lastMessage" appDatetimeAgo [lastMessage]="con.conversation.lastMessage"></span>
+                <em>{{con.unreadCount}}</em>
               </div>
             </div>
           </div>
