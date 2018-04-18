@@ -1,14 +1,13 @@
-import * as functions from 'firebase-functions'
-
-// if you need to use the Firebase Admin SDK, uncomment the following:
-// import * as admin from 'firebase-admin'
+import {admin, functions} from './app/init';
 
 
-// Create and Deploy Cloud Function with TypeScript using script that is
-// defined in functions/package.json:
-//    cd functions
-//    npm run deploy
+import {conversationLastUpdateUpdatedHandler} from './app/handlers';
 
-export let helloWorld = functions.https.onRequest((request, response) => {
- response.send("Hello from Firebase!\n\n");
-});
+/*export let helloWorld = functions.https.onRequest((request, response) => {
+  response.send('Hello from Firebase!\n\n');
+});*/
+
+
+export const conversationLastUpdateUpdated = functions.firestore.document('/conversations/{conversationId}/lastUpdate').onUpdate(
+  conversationLastUpdateUpdatedHandler
+);
