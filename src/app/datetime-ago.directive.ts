@@ -9,7 +9,7 @@ export class DatetimeAgoDirective implements OnInit {
   @Input() lastMessage: any;
 
   constructor(private element: ElementRef) {
-    console.log(this.lastMessage);
+//    console.log(this.lastMessage);
   }
 
   ngOnInit() {

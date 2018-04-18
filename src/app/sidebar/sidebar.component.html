@@ -1,9 +1,9 @@
 <div fxFill id="sidebar" fxLayout="column">
 
-  <form action="" class="has-padding">
+  <form action="" class="has-padding" (ngSubmit)="searchList()">
     <mat-form-field floatLabel="never" fxLayout>
 
-      <input matInput type="search" placeholder="Search for Conversation...">
+      <input matInput autocomplete="off" type="search" name="keyword" [(ngModel)]="keyword" placeholder="Search for Conversation...">
       <span matPrefix>
         <mat-icon>search</mat-icon>
       </span>

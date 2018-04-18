@@ -3,6 +3,7 @@ import {RequestService} from '../request.service';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/mergeMap';
 
@@ -26,14 +27,24 @@ interface ConversationMember {
 export class ConversationsComponent implements OnInit {
 
   // conversationMembersCollection: AngularFirestoreCollection<ConversationMembers>;
+  conversationMemberRef: AngularFirestoreCollection<any[]>;
   conversations: Observable<any[]>;
-  test: Observable<any[]>;
 
   userRef: any;
   loading = false;
+  foundData = false;
 
   constructor(private Request: RequestService, private afs: AngularFirestore) {
+    this.conversationMemberRef = this.afs.collection('conversationMembers');
+    const myId = 'fMlDxgxOuha3FPZ0jm8E';
+    this.userRef = this.getContactRef(myId);
+  }
 
+  private getContactRef(id: string) {
+    return this.afs.collection('contacts').doc(id).ref;
+  }
+  private getConversationRef(id: string) {
+    return this.afs.collection('conversations').doc(id).ref;
   }
 
   private getLastMessage(conversationId) {
@@ -62,6 +73,7 @@ export class ConversationsComponent implements OnInit {
   }
 
   private getSingleMeta(conversationId) {
+    // Get the date of the second and last member in the conversation.
     return this.afs.collection(
       'conversationMembers',
       ref => {
@@ -76,20 +88,25 @@ export class ConversationsComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-    const myId = 'fMlDxgxOuha3FPZ0jm8E';
-    this.userRef = this.afs.collection('contacts').doc(myId).ref;
+  searchConversations(keyword: string) {
+    this.conversations = null;
+    this.foundData = false;
+    this.loadList(keyword);
+  }
+
+  private loadList(keyword?: string) {
+    this.loading = true;
+
     this.conversations = this.afs.collection(
       'conversationMembers',
-      ref => {
-        return ref.where('contactId', '==', this.userRef);
-      }
+      ref => ref.where('contactId', '==', this.userRef)
     ).snapshotChanges().map(
       res => {
         return res.map(a => {
           const data = a.payload.doc.data();
+//          console.log(data);
           data['contactId'] = data.contactId.id;
-          data.conversation = {};
+          data['conversation'] = {};
           data.conversationId.get().then(snap => {
             data.conversation = snap.data();
             data.conversation['id'] = data.conversationId.id;
@@ -107,11 +124,19 @@ export class ConversationsComponent implements OnInit {
             delete data.contactId;
           });
 
+          this.loading = false;
+          if (data) {
+            this.foundData = true;
+          }
           console.log(data);
           return data;
         });
       }
     );
+  }
+
+  ngOnInit() {
+    this.loadList();
 
     // const data = {'eyad': 'hi'};
     // this.Request.call({
@@ -124,4 +149,52 @@ export class ConversationsComponent implements OnInit {
     // });
   }
 
+  private createRandomGroup() {
+    const currentTime = new Date().getTime();
+    this.afs.collection(
+      'conversations'
+    ).add({
+      'creation': currentTime,
+      'groupMeta': {
+        'icon': 'https://firebasestorage.googleapis.com/v0/b/osca-e9735.appspot.com/o/groupIcons%2F1200x630bb.jpg' +
+        '?alt=media&token=b4bcd7ca-5b19-4dec-8732-8a4f6982648a',
+        'name': 'Test Group Name'
+      },
+      'lastUpdate': currentTime,
+      'memberCount': 2,
+      'type': 'group'
+    }).then(res => {
+      const conversationId = this.getConversationRef(res.id);
+      this.afs.collection(
+        'contacts',
+        ref => {
+          return ref.limit(3);
+        }
+      ).snapshotChanges().map(m => {
+        return m.map(c => {
+          return {
+            'contactId': this.getContactRef(c.payload.doc.ref.id),
+            'role': 'member'
+          };
+        });
+      }).subscribe(s => {
+        s[Math.floor(Math.random() * s.length)]['role'] = 'admin';
+        console.log(s);
+        s.forEach(cm => {
+          this.afs.collection(
+            'conversationMembers'
+          ).add({
+            'contactId': cm['contactId'],
+            'conversationId': conversationId,
+            'joinOn': currentTime,
+            'role': cm['role'],
+            'unreadCount': 0
+          }).then(a => {
+            console.log('added', a.id);
+          });
+        });
+
+      });
+    });
+  }
 }

@@ -1,13 +1,15 @@
 <div fxFill fxLayout="column" fxLayoutAlign="space-between">
   <div fxFlex class="scroll">
-    <app-not-found [type]="'conversations'"></app-not-found>
-    <app-placeholder [data]="'conversations'"></app-placeholder>
+    <button (click)="createRandomGroup()">create random group</button>
+    <app-not-found *ngIf="!loading && !foundData" [type]="'conversations'"></app-not-found>
+    <app-placeholder *ngIf="loading && !foundData" [data]="'conversations'"></app-placeholder>
     <ul class="tab-list">
       <li fxLayout *ngFor="let con of conversations | async">
         <a mat-button fxFlex>
           <div class="item-content" fxLayout fxLayoutAlign="start center">
-            <div class="image-wrapper">
-              <img src="../../assets/images/avatars/2.jpg" alt="">
+            <div class="image-wrapper" *ngIf="con.conversation.singleMeta || con.conversation.groupMeta" [ngSwitch]="con.conversation.type">
+              <img *ngSwitchCase="'single'" [src]="con.conversation.singleMeta.avatar" alt="">
+              <img *ngSwitchCase="'group'" [src]="con.conversation.groupMeta.icon" alt="">
             </div>
             <div class="item-info" fxFlex fxLayout fxLayoutAlign="space-between center">
               <div class="basic">
@@ -26,7 +28,7 @@
               </div>
               <div class="extra" fxLayout="column" fxLayoutAlign="center end">
                 <span *ngIf="con.conversation.lastMessage" appDatetimeAgo [lastMessage]="con.conversation.lastMessage"></span>
-                <em>{{con.unreadCount}}</em>
+                <em *ngIf="con.unreadCount > 0">{{con.unreadCount}}</em>
               </div>
             </div>
           </div>
@@ -34,5 +36,5 @@
       </li>
     </ul>
   </div>
-  <mat-progress-bar mode="query"></mat-progress-bar>
+  <mat-progress-bar *ngIf="loading && foundData" mode="query"></mat-progress-bar>
 </div>

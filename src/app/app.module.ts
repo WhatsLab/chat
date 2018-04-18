@@ -9,6 +9,7 @@ import {NgxElectronModule} from 'ngx-electron';
 
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import {MaterialComponentsModule} from './material-components/material-components.module';
 
 import {AppComponent} from './app.component';
@@ -47,6 +48,7 @@ import { DatetimeAgoDirective } from './datetime-ago.directive';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     MaterialComponentsModule,
     NgxElectronModule,
     BrowserAnimationsModule,

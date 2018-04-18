@@ -1,5 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MatTabChangeEvent} from '@angular/material';
+import {ConversationsComponent} from './../conversations/conversations.component';
+import {ContactsComponent} from './../contacts/contacts.component';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -9,6 +12,7 @@ import {MatTabChangeEvent} from '@angular/material';
 })
 export class SidebarComponent implements OnInit {
 
+  @ViewChild(ConversationsComponent) child;
   tabs = [
     {
       'path': 'conversations',
@@ -21,12 +25,18 @@ export class SidebarComponent implements OnInit {
       'icon': 'contacts'
     }
   ];
+  @Input() keyword: string;
+
   selectedTab = this.tabs[0]['label'];
 
   constructor() {
   }
 
   ngOnInit() {
+  }
+
+  searchList() {
+    this.child.searchConversations(this.keyword);
   }
 
   selectedTabChange(event: MatTabChangeEvent) {
