@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "ng build && electron .",
-    "electron-aot": "ng build --prod && electron ."
+    "electron-aot": "ng build --prod && electron .",
+    "deploy-firebase-functions": "cd firebase-functions/functions && npm run deploy"
   },
   "private": true,
   "main": "main.js",
