@@ -19,6 +19,7 @@ interface ConversationMember {
   role: string;
 }
 
+
 @Component({
   selector: 'app-conversations',
   templateUrl: './conversations.component.html',
@@ -40,9 +41,17 @@ export class ConversationsComponent implements OnInit {
     this.userRef = this.getContactRef(myId);
   }
 
+  scrollHandler(e) {
+    if (e === 'bottom') {
+      this.loading = true;
+    }
+    console.log(e);
+  }
+
   private getContactRef(id: string) {
     return this.afs.collection('contacts').doc(id).ref;
   }
+
   private getConversationRef(id: string) {
     return this.afs.collection('conversations').doc(id).ref;
   }
@@ -99,7 +108,7 @@ export class ConversationsComponent implements OnInit {
 
     this.conversations = this.afs.collection(
       'conversationMembers',
-      ref => ref.where('contactId', '==', this.userRef)
+      ref => ref.where('contactId', '==', this.userRef).orderBy('lastUpdate', 'desc').limit(20)
     ).snapshotChanges().map(
       res => {
         return res.map(a => {
@@ -150,7 +159,7 @@ export class ConversationsComponent implements OnInit {
   }
 
   private createRandomGroup() {
-    const currentTime = new Date().getTime();
+    const currentTime = new Date();
     this.afs.collection(
       'conversations'
     ).add({
@@ -187,6 +196,7 @@ export class ConversationsComponent implements OnInit {
             'contactId': cm['contactId'],
             'conversationId': conversationId,
             'joinOn': currentTime,
+            'lastUpdate': currentTime,
             'role': cm['role'],
             'unreadCount': 0
           }).then(a => {

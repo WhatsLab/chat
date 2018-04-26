@@ -30,6 +30,7 @@ import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import { DatetimeAgoDirective } from './datetime-ago.directive';
+import { ScrollableDirective } from './scrollable.directive';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { DatetimeAgoDirective } from './datetime-ago.directive';
     ConversationsComponent,
     ContactsComponent,
     NotFoundComponent,
-    DatetimeAgoDirective
+    DatetimeAgoDirective,
+    ScrollableDirective
   ],
   imports: [
     BrowserModule,

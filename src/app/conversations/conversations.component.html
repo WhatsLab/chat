@@ -1,5 +1,5 @@
 <div fxFill fxLayout="column" fxLayoutAlign="space-between">
-  <div fxFlex class="scroll">
+  <div fxFlex class="scroll" appScrollable (scrollPosition)="scrollHandler($event)">
     <button (click)="createRandomGroup()">create random group</button>
     <app-not-found *ngIf="!loading && !foundData" [type]="'conversations'"></app-not-found>
     <app-placeholder *ngIf="loading && !foundData" [data]="'conversations'"></app-placeholder>
@@ -17,9 +17,9 @@
                   <span *ngSwitchCase="'single'">
                     {{con.conversation.singleMeta ? con.conversation.singleMeta.name.first + ' ' + con.conversation.singleMeta.name.last : ''}}
                   </span>
-                  <span *ngSwitchCase="'group'">
+                  <span *ngSwitchCase="'group'" fxLayout fxLayoutAlign="start center">
                     <mat-icon *ngIf="con.conversation.type == 'group'">people</mat-icon>
-                    {{con.conversation.groupMeta ? con.conversation.groupMeta.name : ''}}
+                    <b>{{con.conversation.groupMeta ? con.conversation.groupMeta.name : ''}}</b>
                   </span>
                 </h3>
                 <p>
@@ -28,7 +28,7 @@
                 </p>
               </div>
               <div class="extra" fxLayout="column" fxLayoutAlign="center end">
-                <div>
+                <div fxLayout fxLayoutAlign="end center">
                   <mat-icon>done_all</mat-icon>
                   <span *ngIf="con.conversation.lastMessage" appDatetimeAgo [lastMessage]="con.conversation.lastMessage"></span>
                 </div>
