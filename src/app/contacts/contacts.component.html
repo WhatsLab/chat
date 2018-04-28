@@ -1,20 +1,20 @@
-<div fxFill  fxLayout="column" fxLayoutAlign="space-between">
+<div fxFill fxLayout="column" fxLayoutAlign="space-between">
   <div fxFlex class="scroll">
-    <app-not-found [type]="'contacts'"></app-not-found>
-    <app-placeholder [data]="'contacts'"></app-placeholder>
+    <app-placeholder *ngIf="page.loading" [data]="'contacts'"></app-placeholder>
+    <app-not-found *ngIf="page.notFound" [type]="'contacts'"></app-not-found>
     <ul class="tab-list style-2">
-      <li fxLayout *ngFor="let i of [0,1,2,3,4,5]; let first = first">
-        <a mat-button fxFlex>
+      <li fxLayout *ngFor="let contact of contacts; let first = first">
+        <a mat-button fxFlex [routerLink]="['/main/conversation/'+contact.id]" queryParamsHandling="merge" >
           <div class="item-content" fxLayout fxLayoutAlign="start center">
             <div class="image-wrapper">
-              <img src="../../assets/images/avatars/2.jpg" alt="">
+              <img [src]="contact.avatar" alt="">
             </div>
             <div class="item-info" fxFlex>
               <div class="basic">
-                <h3>Louise Day</h3>
+                <h3>{{contact.name}}</h3>
                 <p>
                   <span></span>
-                  <span>eyadm.fa@gmail.com</span>
+                  <span>{{contact.email}}</span>
                 </p>
               </div>
             </div>
@@ -23,5 +23,5 @@
       </li>
     </ul>
   </div>
-  <mat-progress-bar mode="query"></mat-progress-bar>
+  <mat-progress-bar *ngIf="page.loadMore" mode="query"></mat-progress-bar>
 </div>

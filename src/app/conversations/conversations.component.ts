@@ -19,6 +19,12 @@ interface ConversationMember {
   role: string;
 }
 
+interface PageState {
+  loading: boolean;
+  loadMore: boolean;
+  notFound: boolean;
+}
+
 
 @Component({
   selector: 'app-conversations',
@@ -29,16 +35,58 @@ export class ConversationsComponent implements OnInit {
 
   // conversationMembersCollection: AngularFirestoreCollection<ConversationMembers>;
   conversationMemberRef: AngularFirestoreCollection<any[]>;
-  conversations: Observable<any[]>;
+  // conversations: Observable<any[]>;
 
   userRef: any;
   loading = false;
   foundData = false;
 
   constructor(private Request: RequestService, private afs: AngularFirestore) {
+    this.page.notFound = false;
     this.conversationMemberRef = this.afs.collection('conversationMembers');
     const myId = 'fMlDxgxOuha3FPZ0jm8E';
     this.userRef = this.getContactRef(myId);
+  }
+
+  conversations;
+  page: PageState = {} as any;
+
+
+  private startLoading(): void {
+    if (!this.conversations || this.conversations.length === 0) {
+      this.page.loading = true;
+    } else {
+      this.page.loadMore = true;
+    }
+  }
+
+  private stopLoading(): void {
+    this.page.loading = false;
+    this.page.loadMore = false;
+  }
+
+
+  private loadConversations(keyword?: string): Array<Object> {
+    return [
+      {
+        'joinOn': '2018-04-24T14:27:57.791Z',
+        'lastUpdate': '2018-04-24T14:27:57.791Z',
+        'role': 'admin',
+        'unreadCount': 0,
+        'conversation': {
+          'creation': '2018-04-24T14:27:57.791Z',
+          'groupMeta': {
+            'icon': 'https://firebasestorage.googleapis.com/v0/b/osca-e9735.appspot.com/o/groupIcons%2F1200x630bb.jpg?alt=media&token=b4' +
+            'bcd7ca-5b19-4dec-8732-8a4f6982648a',
+            'name': 'Test Group Name'
+          },
+          'lastUpdate': '2018-04-24T14:27:57.791Z',
+          'memberCount': 2,
+          'type': 'group',
+          'id': 'bmF0uUDBZ4CaskzYGe4a'
+        }
+      }
+    ];
   }
 
   scrollHandler(e) {
@@ -100,10 +148,11 @@ export class ConversationsComponent implements OnInit {
   searchConversations(keyword: string) {
     this.conversations = null;
     this.foundData = false;
-    this.loadList(keyword);
+    this.loadConversations(keyword);
   }
 
-  private loadList(keyword?: string) {
+
+  private loadListOld(keyword?: string) {
     this.loading = true;
 
     this.conversations = this.afs.collection(
@@ -145,7 +194,16 @@ export class ConversationsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadList();
+    this.startLoading();
+    setTimeout(() => {
+      this.conversations = this.loadConversations();
+      if (this.conversations.length === 0) {
+        this.page.notFound = true;
+      } else {
+        this.page.notFound = false;
+      }
+      this.stopLoading();
+    }, 1000);
 
     // const data = {'eyad': 'hi'};
     // this.Request.call({

@@ -1,10 +1,10 @@
 <div fxFill fxLayout="column" fxLayoutAlign="space-between">
   <div fxFlex class="scroll" appScrollable (scrollPosition)="scrollHandler($event)">
-    <button (click)="createRandomGroup()">create random group</button>
-    <app-not-found *ngIf="!loading && !foundData" [type]="'conversations'"></app-not-found>
-    <app-placeholder *ngIf="loading && !foundData" [data]="'conversations'"></app-placeholder>
+    <!--<button (click)="createRandomGroup()">create random group</button>-->
+    <app-placeholder *ngIf="page.loading" [data]="'conversations'"></app-placeholder>
+    <app-not-found *ngIf="page.notFound" [type]="'conversations'"></app-not-found>
     <ul class="tab-list">
-      <li fxLayout *ngFor="let con of conversations | async">
+      <li fxLayout *ngFor="let con of conversations">
         <a mat-button fxFlex>
           <div class="item-content" fxLayout fxLayoutAlign="start center">
             <div class="image-wrapper" *ngIf="con.conversation.singleMeta || con.conversation.groupMeta" [ngSwitch]="con.conversation.type">
@@ -40,5 +40,5 @@
       </li>
     </ul>
   </div>
-  <mat-progress-bar *ngIf="loading && foundData" mode="query"></mat-progress-bar>
+  <mat-progress-bar *ngIf="page.loadMore" mode="query"></mat-progress-bar>
 </div>

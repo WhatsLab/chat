@@ -1,10 +1,13 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /* You can add global styles to this file, and also import other style files */
 @import 'assets/colors.scss';
+@import 'assets/typography.scss';
+
 
 html, body{
   height: 100%;
   margin: 0;
+  font-family: tahoma;
 }
 
 .scroll{
@@ -51,6 +54,9 @@ html, body{
   border-radius: 50%;
 }
 
+.bottom-border{
+  @extend %bottom-border;
+}
 .top-border{
   @extend %top-border;
 }
@@ -67,3 +73,9 @@ html, body{
   flex: 1;
 }
 
+%meta-title{
+  font-size: $conversation-title-size;
+}
+.meta-title{
+  @extend %meta-title;
+}

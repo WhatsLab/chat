@@ -1,0 +1,51 @@
+
+
+#conversation header {
+  height: 60pt;
+}
+
+#conversation header .image-wrapper {
+  margin-right: 10pt;
+}
+
+#conversation header .meta h1 {
+  margin: 0;
+}
+
+#conversation header .meta p {
+  margin: 0;
+  color: #7d7d7d;
+  margin-top: 3pt;
+  font-size: 10pt;
+}
+
+#conversation section {
+  background-image: url("../../assets/images/main-bg.png");
+}
+
+#conversation header .image-wrapper img {
+  width: 45pt;
+  height: 45pt;
+}
+
+#conversation footer {
+  height: 69pt;
+}
+#conversation footer .sending-option{
+  width: 50pt;
+}
+#conversation footer .sending-option button{
+  padding: 0;
+  margin: 0;
+}
+
+@mixin md-icon-size($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: $size;
+}
+
+#conversation footer .sending-option button mat-icon {
+  @include md-icon-size(32px);
+}

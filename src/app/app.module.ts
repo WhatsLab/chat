@@ -15,7 +15,7 @@ import {MaterialComponentsModule} from './material-components/material-component
 import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
 import {BlankComponent} from './blank/blank.component';
-import {ChatComponent} from './chat/chat.component';
+import {ConversationComponent} from './conversation/conversation.component';
 
 import {appRoutes} from './app.routes';
 import {SidebarComponent} from './sidebar/sidebar.component';
@@ -31,13 +31,14 @@ import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import { DatetimeAgoDirective } from './datetime-ago.directive';
 import { ScrollableDirective } from './scrollable.directive';
+import { ObjNgForPipe } from './obj-ng-for.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     BlankComponent,
-    ChatComponent,
+    ConversationComponent,
     SidebarComponent,
     LoginComponent,
     GroupsComponent,
@@ -46,7 +47,8 @@ import { ScrollableDirective } from './scrollable.directive';
     ContactsComponent,
     NotFoundComponent,
     DatetimeAgoDirective,
-    ScrollableDirective
+    ScrollableDirective,
+    ObjNgForPipe
   ],
   imports: [
     BrowserModule,

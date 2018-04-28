@@ -5,7 +5,7 @@ import {Routes} from '@angular/router';
 import {MainComponent} from './main/main.component';
 import {LoginComponent} from './login/login.component';
 import {BlankComponent} from './blank/blank.component';
-import {ChatComponent} from './chat/chat.component';
+import {ConversationComponent} from './conversation/conversation.component';
 
 
 export const appRoutes: Routes = [
@@ -22,8 +22,8 @@ export const appRoutes: Routes = [
         component: BlankComponent
       },
       {
-        path: 'chat',
-        component: ChatComponent
+        path: 'conversation/:conversationId',
+        component: ConversationComponent
       },
       {
         path: '',
