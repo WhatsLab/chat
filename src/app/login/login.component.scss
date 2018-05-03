@@ -1,0 +1,16 @@
+@import './../../assets/colors.scss';
+
+#login-page{}
+#login-page h1{
+  font-weight: normal;
+  color: $gray-color;
+  margin-top: 0;
+}
+#login-page form{}
+#login-page form .mat-form-field-flex{
+  border: 1px solid red;
+}
+#login-page form .mat-form-field-underline{
+  display: none;
+}
+#login-page form div button{}

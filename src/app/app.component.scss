@@ -2,6 +2,7 @@
 @import '~@angular/material/theming';
 // Import your custom theme
 @import '../assets/unicorn-app-theme.scss';
+@import '../assets/colors';
 
 // Use mat-color to extract individual colors from a palette as necessary.
 // The hue can be one of the standard values (500, A400, etc.), one of the three preconfigured
@@ -23,7 +24,7 @@
 
 #title-bar{
   -webkit-app-region: drag;
-  background-color: rgb(35, 125, 72);
+  background-color: $base-color-dark;
 }
 #title{
   padding-left: 10pt;
@@ -89,7 +90,7 @@
   line-height: 14pt;
 }
 #user-menu p{
-  color: #94ce57;
+  color: $base-color;
   font-size: 9pt;
 }
 #user-menu h1, #user-menu p{
@@ -97,4 +98,7 @@
   text-transform: initial;
   margin: 0;
   text-align: left;
+}
+#app-header{
+  background-color: $base-color;
 }

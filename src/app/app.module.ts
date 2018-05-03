@@ -33,6 +33,7 @@ import {environment} from '../environments/environment';
 import { DatetimeAgoDirective } from './datetime-ago.directive';
 import { ScrollableDirective } from './scrollable.directive';
 import { ObjNgForPipe } from './obj-ng-for.pipe';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ObjNgForPipe } from './obj-ng-for.pipe';
     NotFoundComponent,
     DatetimeAgoDirective,
     ScrollableDirective,
-    ObjNgForPipe
+    ObjNgForPipe,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

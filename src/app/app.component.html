@@ -22,7 +22,7 @@
   <div fxLayout="column" fxFlex>
 
     <!-- Toolbar -->
-    <mat-toolbar color="primary" id="app-header">
+    <mat-toolbar id="app-header">
       <mat-toolbar-row fxLayout fxLayoutAlign="space-between center">
         <div id="logo-aria" fxLayout fxLayoutAlign="start center">
           <button mat-icon-button>
@@ -56,7 +56,7 @@
               <mat-icon>settings</mat-icon>
               <span>Settings</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="logout()">
               <mat-icon>power_settings_new</mat-icon>
               <span>Logout</span>
             </button>

@@ -1,4 +1,5 @@
 @import './../../assets/mixins.scss';
+@import './../../assets/colors.scss';
 
 #conversation header {
   height: 60pt;
@@ -46,7 +47,7 @@
 
 #conversation footer .sending-option button mat-icon, #conversation header .right-button mat-icon {
   @include md-icon-size(32px);
-  color: #4caf50;
+  color: $base-color;
 
 }
 
@@ -118,7 +119,7 @@
   min-width: 100pt;
   max-width: 90%;
   display: inline-block;
-  background-color: #4caf50;
+  background-color: $base-color;
   padding: 0 7pt;
   border-radius: 5pt;
   color: white;
@@ -140,7 +141,7 @@
   border-left: 8pt solid transparent;
   border-top: 8pt solid transparent;
   left: -7pt;
-  border-bottom: 8pt solid #4caf50;
+  border-bottom: 8pt solid $base-color;
 }
 
 #chat-list > li.mine ul li .message-wrapper {
