@@ -10,6 +10,11 @@ html, body{
   font-family: tahoma;
 }
 
+ul{
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
 .scroll{
   overflow-y: auto;
 }
@@ -30,6 +35,9 @@ html, body{
 }
 %right-border {
   border-right: 1px solid $sections-border-color !important;
+}
+%left-border {
+  border-left: 1px solid $sections-border-color !important;
 }
 %bottom-border {
   border-bottom: 1px solid $sections-border-color !important;
@@ -62,6 +70,9 @@ html, body{
 }
 .right-border{
   @extend %right-border;
+}
+.left-border{
+  @extend %left-border;
 }
 
 

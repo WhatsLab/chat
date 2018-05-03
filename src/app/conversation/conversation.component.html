@@ -1,5 +1,6 @@
-<div fxFlex="100%" fxFill fxLayoutAlign="center center" fxLayout="row wrap">
-  <div fxFill  fxLayout="column" id="conversation">
+<div fxFlex="100%" id="conversation-page" fxFill fxLayoutAlign="start stretch" fxLayout="row"
+     [@infoPageAnimation]="showInfoPage">
+  <div fxFlex fxLayout="column" id="conversation">
     <header fxLayout fxLayoutAlign="space-between center" class="bottom-border has-padding">
       <div fxLayout fxLayoutAlign="start center">
         <div class="image-wrapper rounded">
@@ -10,28 +11,91 @@
           <p>typing...</p>
         </div>
       </div>
-      <button mat-icon-button fxLayout fxLayoutAlign="center center">
+      <button class="right-button" mat-icon-button fxLayout fxLayoutAlign="center center"
+              (click)="toggleInfoPage(true)">
         <mat-icon>info_outline</mat-icon>
       </button>
     </header>
-    <section fxFlex class="has-padding">
-      section content
+    <section fxFlex class="scroll">
+      <mat-progress-bar *ngIf="page.loading" mode="query"></mat-progress-bar>
+      <div class="has-padding" fxFill>
+        <ul id="chat-list" fxFill fxLayout="row wrap" fxLayoutAlign="start end">
+          <li *ngFor="let chat of chats" fxFlex="100" fxLayout fxLayoutAlign="start end"
+              [ngClass]="{'mine': isMe(chat.sender.id)}">
+            <button mat-button class="image-wrapper rounded" (click)="toggleInfoPage(true)">
+              <img [src]="chat.sender.avatar"/>
+            </button>
+            <ul fxFlex>
+              <li *ngFor="let message of chat.messages; let first = first;">
+                <div class="message-wrapper">
+                  <div class="header" *ngIf="first">
+                    <b>
+                      {{chat.sender.name}}
+                    </b>
+                  </div>
+                  <div class="body">
+                    {{message.content}}
+                  </div>
+                  <div class="footer" fxLayout fxLayoutAlign="end center">
+                    <span class="time">{{message.sentOn | date}}</span>
+                    <div class="seen" *ngIf="isMe(chat.sender.id)" [ngSwitch]="message.seenBy.length > 0">
+                      <mat-icon *ngSwitchCase="false">done</mat-icon>
+                      <mat-icon *ngSwitchCase="true">done_all</mat-icon>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
     </section>
     <footer class="has-padding top-border" fxLayout>
-      <div class="sending-option"  fxLayout fxLayoutAlign="center center">
+      <div class="sending-option" fxLayout fxLayoutAlign="center end">
         <button mat-icon-button>
           <mat-icon>attach_file</mat-icon>
-
         </button>
       </div>
-      <div fxFlex>
-        <textarea name="" id="" cols="30" rows="2"></textarea>
-      </div>
-      <div class="sending-option"  fxLayout fxLayoutAlign="center center">
+      <form name="sendTextForm" (keyup.enter)="addTextMessage(textContent)" class="middle-side" fxFlex fxLayout="column"
+            fxLayoutAlign="center center">
+        <div style="visibility: hidden;" class="contenteditable has-padding">{{textContent}}</div>
+        <textarea class="has-padding" [(ngModel)]="textContent" placeholder="Type your message ..." name="textContent"
+                  cols="30" rows="2"></textarea>
+      </form>
+      <div class="sending-option" fxLayout fxLayoutAlign="center end">
         <button mat-icon-button>
           <mat-icon>insert_emoticon</mat-icon>
         </button>
       </div>
     </footer>
+  </div>
+  <div id="info-page" fxLayout="column" *ngIf="showInfoPage">
+    <div class="left-border" fxFill fxLayout="column">
+      <div class="header has-padding bottom-border" fxLayout fxLayoutAlign="start center">
+        <button mat-icon-button (click)="toggleInfoPage()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <span>Close</span>
+      </div>
+      <div class="body has-padding" fxFlex>
+        <div fxLayout="column" class="has-padding" fxLayoutAlign="start center">
+          <div fxLayout id="info-icon" fxLayoutAlign="center center">
+            <div class="image-wrapper rounded">
+              <img src="./../../assets/images/avatars/3.jpg" alt="">
+            </div>
+          </div>
+          <div id="info-meta">
+            <h1>
+              Eyad Farra
+            </h1>
+            <p>
+              eyadm.fa@gmail.com
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>

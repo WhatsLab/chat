@@ -11,6 +11,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import {MaterialComponentsModule} from './material-components/material-components.module';
+import {SimpleNg5StorageModule} from 'simple-ng5-storage';
 
 import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
@@ -53,6 +54,7 @@ import { ObjNgForPipe } from './obj-ng-for.pipe';
   imports: [
     BrowserModule,
     FormsModule,
+    SimpleNg5StorageModule,
     MaterialComponentsModule,
     NgxElectronModule,
     BrowserAnimationsModule,
