@@ -34,6 +34,7 @@ import { DatetimeAgoDirective } from './datetime-ago.directive';
 import { ScrollableDirective } from './scrollable.directive';
 import { ObjNgForPipe } from './obj-ng-for.pipe';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     DatetimeAgoDirective,
     ScrollableDirective,
     ObjNgForPipe,
-    SignUpComponent
+    SignUpComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

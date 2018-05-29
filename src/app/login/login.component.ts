@@ -15,12 +15,21 @@ export class LoginComponent implements OnInit {
 
   inputs: LoginInputs = {} as any;
 
+  loading: boolean;
+
   constructor(private router: Router) {
   }
 
   login() {
+    this.loading = true;
+
     console.log(this.inputs);
-    this.router.navigate(['main/blank']);
+
+    setTimeout(() => {
+      this.loading = false;
+      this.router.navigate(['main/blank']);
+    }, 3000);
+
   }
 
   ngOnInit() {

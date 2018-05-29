@@ -1,0 +1,13 @@
+<button fxFill mat-raised-button color="primary" [disabled]="disabled" [ngSwitch]="disabled">
+  <div *ngSwitchDefault>
+    <span>
+    {{label}}
+    </span>
+  </div>
+  <div *ngSwitchCase="true" fxLayout fxLayoutAlign="center center" class="button-loading">
+    <mat-spinner strokeWidth="2" diameter="20"></mat-spinner>
+    <span>
+    {{loadingLabel}} ...
+    </span>
+  </div>
+</button>
