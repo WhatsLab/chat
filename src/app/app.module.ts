@@ -7,9 +7,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {NgxElectronModule} from 'ngx-electron';
 
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialComponentsModule} from './material-components/material-components.module';
 import {SimpleNg5StorageModule} from 'simple-ng5-storage';
 
@@ -26,15 +26,16 @@ import {ContactsComponent} from './contacts/contacts.component';
 import {GroupsComponent} from './groups/groups.component';
 import {PlaceholderComponent} from './placeholder/placeholder.component';
 import {RequestService} from './request.service';
+import {EventBrokerService} from './event-broker.service';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
-import { DatetimeAgoDirective } from './datetime-ago.directive';
-import { ScrollableDirective } from './scrollable.directive';
-import { ObjNgForPipe } from './obj-ng-for.pipe';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { ButtonComponent } from './button/button.component';
+import {DatetimeAgoDirective} from './datetime-ago.directive';
+import {ScrollableDirective} from './scrollable.directive';
+import {ObjNgForPipe} from './obj-ng-for.pipe';
+import {SignUpComponent} from './sign-up/sign-up.component';
+import {ButtonComponent} from './button/button.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ButtonComponent } from './button/button.component';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     SimpleNg5StorageModule,
     MaterialComponentsModule,
     NgxElectronModule,
@@ -73,7 +75,8 @@ import { ButtonComponent } from './button/button.component';
     // AngularFirestoreModule.enablePersistence() // <--- update this line for enable offline Data
   ],
   providers: [
-    RequestService
+    RequestService,
+    EventBrokerService
   ],
   bootstrap: [
     AppComponent

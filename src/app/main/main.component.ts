@@ -1,4 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {EventBrokerService} from '../event-broker.service';
 
 @Component({
   selector: 'app-main',
@@ -7,10 +8,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  @Output() isLoggedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor() {
-    this.isLoggedEmitter.emit(true);
+  constructor(private _eventBroker: EventBrokerService) {
+    this._eventBroker.emit<boolean>('is-logged', true);
   }
 
   ngOnInit() {

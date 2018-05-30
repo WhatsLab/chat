@@ -4,21 +4,28 @@
       <h1>
         Sign in to your account
       </h1>
-      <form action="" (submit)="login()" name="loginForm" fxLayout="column" fxLayoutAlign="start stretch">
+      <form [formGroup]="loginForm" novalidate (submit)="login()" name="loginForm" fxLayout="column"
+            fxLayoutAlign="start stretch">
         <mat-form-field hideRequiredMarker class="example-full-width">
-          <input matInput required placeholder="Email" autocomplete="false" type="email" name="email"
-                 [(ngModel)]="inputs.email"/>
+          <input matInput placeholder="Email" autocomplete="false" type="email" formControlName="email"/>
+          <mat-error *ngIf="email.invalid">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">You must enter valid email</div>
+          </mat-error>
         </mat-form-field>
         <mat-form-field hideRequiredMarker class="example-full-width">
-          <input matInput required placeholder="Password" type="password" name="password"
-                 [(ngModel)]="inputs.password"/>
+          <input matInput placeholder="Password" type="password" formControlName="password"/>
+          <mat-error *ngIf="password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minLength">You must enter password length at least 8 character</div>
+          </mat-error>
         </mat-form-field>
         <div fxLayout>
-          <app-button fxFill [disabled]="loading" label="Sign in" loadingLabel="Signing In"></app-button>
+          <app-button fxFill [loading]="loading" [invalid]="loginForm.invalid" label="Sign in"
+                      loadingLabel="Signing In"></app-button>
         </div>
 
       </form>
-      <button (click)="testEvent()">test</button>
       <div fxLayout fxLayoutAlign="start center">
         <p>If you do not have an account?</p>
         <button mat-button routerLink="/signUp">Join Us</button>

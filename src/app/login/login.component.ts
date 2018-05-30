@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewEncapsulation, EventEmitter, Output} from '@angular/core';
 import {Router} from '@angular/router';
+import {EventBrokerService} from '../event-broker.service';
+import {Form, FormControl, FormGroup, Validators} from '@angular/forms';
 
 interface LoginInputs {
   email: string;
@@ -14,19 +16,30 @@ interface LoginInputs {
 })
 export class LoginComponent implements OnInit {
 
-  inputs: LoginInputs = {} as any;
-
   loading: boolean;
-  @Output() isLoggedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private router: Router) {
+  loginForm: FormGroup;
 
+  email: FormControl;
+  password: FormControl;
+
+  constructor(private router: Router, private _eventBroker: EventBrokerService) {
+    this._eventBroker.emit<boolean>('is-logged', false);
+
+    this.email = new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]);
+    this.password = new FormControl('', [
+      Validators.required,
+      Validators.minLength(8)
+    ]);
   }
 
   login() {
     this.loading = true;
 
-    console.log(this.inputs);
+    console.log(this.loginForm.value);
 
     setTimeout(() => {
       this.loading = false;
@@ -35,11 +48,12 @@ export class LoginComponent implements OnInit {
 
   }
 
-  testEvent() {
-    this.isLoggedEmitter.emit(true);
-  }
 
   ngOnInit() {
+    this.loginForm = new FormGroup({
+      email: this.email,
+      password: this.password
+    });
     // this.isLoggedEmitter.emit(true);
   }
 

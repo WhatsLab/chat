@@ -1,4 +1,4 @@
-<button fxFill mat-raised-button color="primary" [disabled]="disabled" [ngSwitch]="disabled">
+<button fxFill mat-raised-button color="primary" [disabled]="loading || invalid" [ngSwitch]="loading">
   <div *ngSwitchDefault>
     <span>
     {{label}}
