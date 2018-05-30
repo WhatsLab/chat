@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, EventEmitter, Output} from '@angular/core';
 import {Router} from '@angular/router';
 
 interface LoginInputs {
@@ -9,15 +9,18 @@ interface LoginInputs {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  encapsulation: ViewEncapsulation.None // <------
 })
 export class LoginComponent implements OnInit {
 
   inputs: LoginInputs = {} as any;
 
   loading: boolean;
+  @Output() isLoggedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private router: Router) {
+
   }
 
   login() {
@@ -32,7 +35,12 @@ export class LoginComponent implements OnInit {
 
   }
 
+  testEvent() {
+    this.isLoggedEmitter.emit(true);
+  }
+
   ngOnInit() {
+    // this.isLoggedEmitter.emit(true);
   }
 
 }

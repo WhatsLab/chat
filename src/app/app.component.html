@@ -1,4 +1,4 @@
-<div fxLayout="column" fxFill>
+<div fxLayout="column" fxFill >
   <!-- Custom screen window buttons -->
   <div id="title-bar" fxLayout fxLayoutAlign="space-between center">
     <div id="title">OSCA</div>
@@ -19,7 +19,7 @@
   </div>
 
   <!-- Application content -->
-  <div fxLayout="column" fxFlex>
+  <div fxLayout="column" fxFlex (isLoggedEmitter)="changeLoggedStatus($event)">
 
     <!-- Toolbar -->
     <mat-toolbar id="app-header">
@@ -36,7 +36,7 @@
             <p>Open Source Chat App</p>
           </div>
         </div>
-        <div id="user-aria">
+        <div id="user-aria" *ngIf="isLogged">
           <button mat-button [matMenuTriggerFor]="menu">
             <div fxLayout fxLayoutAlign="center center" id="user-menu">
               <div class="image-wrapper">

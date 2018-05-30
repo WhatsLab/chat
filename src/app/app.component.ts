@@ -11,12 +11,19 @@ import {Router} from '@angular/router';
 
 export class AppComponent {
   title = 'app';
+  isLogged: boolean;
 
   constructor(private _electronService: ElectronService, private router: Router) {
+    // this.isLogged = false;
+  }
 
+  changeLoggedStatus(isLogged: boolean): void {
+    console.log(isLogged);
+    this.isLogged = !this.isLogged || true;
   }
 
   logout() {
+    this.isLogged = false;
     this.router.navigate(['login']);
   }
 
