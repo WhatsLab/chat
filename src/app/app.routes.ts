@@ -4,7 +4,7 @@ import {Routes} from '@angular/router';
 
 import {MainComponent} from './main/main.component';
 import {LoginComponent} from './login/login.component';
-import {SignUpComponent} from './sign-up/sign-up.component';
+import {JoinUsComponent} from './join-us/join-us.component';
 import {BlankComponent} from './blank/blank.component';
 import {ConversationComponent} from './conversation/conversation.component';
 
@@ -15,8 +15,8 @@ export const appRoutes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'signUp',
-    component: SignUpComponent
+    path: 'joinUs',
+    component: JoinUsComponent
   },
   {
     path: 'main',

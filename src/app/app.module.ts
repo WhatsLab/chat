@@ -29,12 +29,13 @@ import {RequestService} from './request.service';
 import {EventBrokerService} from './event-broker.service';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
+import {AngularFireAuthModule} from 'angularfire2/auth';
 import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import {DatetimeAgoDirective} from './datetime-ago.directive';
 import {ScrollableDirective} from './scrollable.directive';
 import {ObjNgForPipe} from './obj-ng-for.pipe';
-import {SignUpComponent} from './sign-up/sign-up.component';
+import {JoinUsComponent} from './join-us/join-us.component';
 import {ButtonComponent} from './button/button.component';
 
 @NgModule({
@@ -53,7 +54,7 @@ import {ButtonComponent} from './button/button.component';
     DatetimeAgoDirective,
     ScrollableDirective,
     ObjNgForPipe,
-    SignUpComponent,
+    JoinUsComponent,
     ButtonComponent
   ],
   imports: [
@@ -72,6 +73,7 @@ import {ButtonComponent} from './button/button.component';
     ),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // for firestore
+    AngularFireAuthModule
     // AngularFirestoreModule.enablePersistence() // <--- update this line for enable offline Data
   ],
   providers: [

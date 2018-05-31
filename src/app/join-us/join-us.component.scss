@@ -1,0 +1,74 @@
+@import './../../assets/colors.scss';
+
+#joinus-page {
+}
+#login-page > div {
+  padding: 10pt;
+}
+
+#joinus-page h1 {
+  font-weight: normal;
+  color: $gray-color;
+  margin-top: 0;
+  font-size: 23pt;
+  margin-bottom: 55pt;
+}
+
+#joinus-page form {
+}
+
+
+#joinus-page form fieldset{
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+
+#joinus-page form .mat-form-field-underline {
+  display: none;
+}
+
+#joinus-page form div button {
+}
+
+#joinus-page app-button {
+  height: 36pt !important;
+  border-radius: 4pt;
+  overflow: hidden;
+}
+
+button.mat-raised-button.mat-primary {
+  font-size: 14pt;
+}
+
+
+#joinus-page .mat-form-field-infix {
+  border: 1pt solid gainsboro;
+  padding: 10pt;
+  border-radius: 4pt;
+}
+
+#joinus-page  .mat-form-field-invalid .mat-form-field-infix {
+  border-color: #f44336;
+}
+
+#joinus-page .mat-input-container:not(.mat-focused) .mat-form-field-empty.mat-form-field-label {
+  padding-left: 10pt;
+  padding-top: 5pt;
+}
+
+#joinus-page .mat-form-field:first-of-type {
+  margin-bottom: 20pt;
+}
+
+#joinus-page .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  -webkit-transform: translateY(-26pt);
+  transform: translateY(-26pt);
+  -ms-transform: translateY(-26pt);
+  width: auto;
+}
+
+#joinus-page .mat-form-field-label-wrapper{
+  overflow: initial;
+}

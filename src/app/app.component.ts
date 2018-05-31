@@ -2,6 +2,8 @@ import {Component, OnDestroy} from '@angular/core';
 import {ElectronService} from 'ngx-electron';
 import {Router} from '@angular/router';
 import {EventBrokerService} from './event-broker.service';
+import {MatSnackBar} from '@angular/material';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +15,26 @@ export class AppComponent implements OnDestroy {
   title = 'app';
   isLogged: boolean;
   private _myEventListener;
+  private _snackBarListener;
 
-  constructor(private _electronService: ElectronService, private router: Router, private _eventBroker: EventBrokerService) {
+  constructor(private _electronService: ElectronService, private router: Router, private _eventBroker: EventBrokerService,
+              public snackBar: MatSnackBar, private _autn: AngularFireAuth) {
     // this.isLogged = false;
     this._myEventListener = _eventBroker.listen<boolean>('is-logged', (value: boolean) => {
       this.isLogged = value;
+    });
+    this._snackBarListener = _eventBroker.listen('open-snack-bar', (data: any) => {
+      const {message, action = '', duration = 5000} = data;
+      this.snackBar.open(message, action, {
+        duration,
+        horizontalPosition: 'left'
+      });
     });
   }
 
   public ngOnDestroy() {
     this._myEventListener.ignore();
+    this._snackBarListener.ignore();
   }
 
   changeLoggedStatus(isLogged: boolean): void {
@@ -31,6 +43,7 @@ export class AppComponent implements OnDestroy {
   }
 
   logout() {
+    this._autn.auth.signOut();
     this.isLogged = false;
     this.router.navigate(['login']);
   }

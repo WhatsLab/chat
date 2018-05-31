@@ -17,18 +17,17 @@
           <input matInput placeholder="Password" type="password" formControlName="password"/>
           <mat-error *ngIf="password.invalid">
             <div *ngIf="password.errors.required">Password is required</div>
-            <div *ngIf="password.errors.minLength">You must enter password length at least 8 character</div>
+            <div *ngIf="password.errors.minlength">You must enter password length at least {{password.errors.minlength.requiredLength}} character</div>
           </mat-error>
         </mat-form-field>
         <div fxLayout>
           <app-button fxFill [loading]="loading" [invalid]="loginForm.invalid" label="Sign in"
                       loadingLabel="Signing In"></app-button>
         </div>
-
       </form>
       <div fxLayout fxLayoutAlign="start center">
         <p>If you do not have an account?</p>
-        <button mat-button routerLink="/signUp">Join Us</button>
+        <button mat-button routerLink="/joinUs">Join Us</button>
       </div>
     </div>
   </div>

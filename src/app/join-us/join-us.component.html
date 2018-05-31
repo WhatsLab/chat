@@ -1,0 +1,50 @@
+<div fxFill id="joinus-page" fxLayout="column" fxLayoutAlign="center">
+  <div fxLayout fxLayoutAlign="center center">
+    <div fxFlex="340pt">
+      <h1>
+        Join Us
+      </h1>
+      <form [formGroup]="joinUsForm" novalidate (submit)="joinUs()" name="joinUsForm" fxLayout="column"
+            fxLayoutAlign="start stretch">
+        <div formGroupName="name" fxLayout fxLayoutAlign="space-between start">
+          <mat-form-field hideRequiredMarker fxFlex="45">
+            <input matInput placeholder="First Name" type="text" formControlName="firstName"/>
+            <mat-error *ngIf="firstName.invalid">
+              <div *ngIf="firstName.errors.required">First Name is required</div>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field hideRequiredMarker fxFlex="45">
+            <input matInput placeholder="Last Name" type="text" formControlName="lastName"/>
+            <mat-error *ngIf="lastName.invalid">
+              <div *ngIf="lastName.errors.required">Last Name is required</div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <mat-form-field hideRequiredMarker>
+          <input matInput placeholder="Email" autocomplete="false" type="email" formControlName="email"/>
+          <mat-error *ngIf="email.invalid">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">You must enter valid email</div>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field hideRequiredMarker>
+          <input matInput placeholder="Password" type="password" formControlName="password"/>
+          <mat-error *ngIf="password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">You must enter password length at least
+              {{password.errors.minlength.requiredLength}} character
+            </div>
+          </mat-error>
+        </mat-form-field>
+        <div fxLayout>
+          <app-button fxFill [loading]="loading" [invalid]="joinUsForm.invalid" label="Sign Up"
+                      loadingLabel="Signing Up"></app-button>
+        </div>
+      </form>
+
+      <div fxLayout fxLayoutAlign="start center">
+        <button mat-button routerLink="/login">Back to login</button>
+      </div>
+    </div>
+  </div>
+</div>
