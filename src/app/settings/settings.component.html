@@ -1,0 +1,21 @@
+<div fxLayout fxFill>
+
+  <!-- Left side including search and tabs sections-->
+  <nav>
+    <ul>
+      <li>
+        <button mat-button routerLink="profile">Profile</button>
+      </li>
+      <li>
+        <button mat-button routerLink="security">security</button>
+      </li>
+    </ul>
+  </nav>
+  <!-- This will inject page may be one of the [Conversation, order details, customer details]-->
+  <div fxLayout="column" fxFlex fxLayoutAlign="start stretch">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>
+
+

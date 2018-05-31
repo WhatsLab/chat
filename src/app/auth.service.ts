@@ -8,8 +8,12 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return this._auth.authState.subscribe(res => {
-      return res ? res.isAnonymous : false;
+    return new Promise((resolve, reject) => {
+      this._auth.authState.subscribe(res => {
+        const isAuth = res ? !res.isAnonymous : false;
+        const user = isAuth ? res.providerData[0] : {};
+        resolve({isAuth, user});
+      });
     });
   }
 }

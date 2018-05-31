@@ -19,10 +19,12 @@ import {ObjNgForPipe} from './obj-ng-for.pipe';
 /* Directives */
 import {DatetimeAgoDirective} from './datetime-ago.directive';
 import {ScrollableDirective} from './scrollable.directive';
+import {DefaultImgDirective} from './default-img.directive';
 
 /* Services */
 import {AuthService} from './auth.service';
 import {AuthGuardService} from './auth-guard.service';
+import {AuthOutUserService} from './auth-out-user.service';
 import {RequestService} from './request.service';
 import {EventBrokerService} from './event-broker.service';
 
@@ -44,6 +46,10 @@ import {LoginComponent} from './login/login.component';
 import {ContactsComponent} from './contacts/contacts.component';
 import {GroupsComponent} from './groups/groups.component';
 import {PlaceholderComponent} from './placeholder/placeholder.component';
+import {SettingsComponent} from './settings/settings.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SecurityComponent } from './security/security.component';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +68,11 @@ import {PlaceholderComponent} from './placeholder/placeholder.component';
     ScrollableDirective,
     ObjNgForPipe,
     JoinUsComponent,
-    ButtonComponent
+    ButtonComponent,
+    DefaultImgDirective,
+    SettingsComponent,
+    ProfileComponent,
+    SecurityComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +97,8 @@ import {PlaceholderComponent} from './placeholder/placeholder.component';
     RequestService,
     EventBrokerService,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    AuthOutUserService
   ],
   bootstrap: [
     AppComponent

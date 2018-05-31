@@ -40,7 +40,7 @@
           <button mat-button [matMenuTriggerFor]="menu">
             <div fxLayout fxLayoutAlign="center center" id="user-menu">
               <div class="image-wrapper">
-                <img [src]="loggedUser.photoURL" alt="user profile pic">
+                <img appDefaultImg [src]="loggedUser.photoURL" alt="user profile pic">
               </div>
               <div fxHide.xs id="user-menu-info" fxLayout="column" fxLayoutAlign="center start">
                 <h1 fxLayout fxLayoutAlign="center center">
@@ -52,7 +52,7 @@
             </div>
           </button>
           <mat-menu #menu="matMenu" overlapTrigger="false">
-            <button mat-menu-item color="primary">
+            <button mat-menu-item color="primary" routerLink="settings/profile">
               <mat-icon>settings</mat-icon>
               <span>Settings</span>
             </button>
