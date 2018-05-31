@@ -8,6 +8,10 @@ import {JoinUsComponent} from './join-us/join-us.component';
 import {BlankComponent} from './blank/blank.component';
 import {ConversationComponent} from './conversation/conversation.component';
 
+import {
+  AuthGuardService as AuthGuard
+} from './auth-guard.service';
+
 
 export const appRoutes: Routes = [
   {
@@ -20,6 +24,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'main',
+    canActivate: [AuthGuard],
     component: MainComponent,
     children: [
       {

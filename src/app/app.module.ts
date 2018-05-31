@@ -1,42 +1,49 @@
+/* Libraries/Modules */
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
-
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
-
 import {NgxElectronModule} from 'ngx-electron';
-
 import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialComponentsModule} from './material-components/material-components.module';
 import {SimpleNg5StorageModule} from 'simple-ng5-storage';
+import {AngularFirestoreModule} from 'angularfire2/firestore';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import {AngularFireModule} from 'angularfire2';
 
+/* Pipe/Filters */
+import {ObjNgForPipe} from './obj-ng-for.pipe';
+
+/* Directives */
+import {DatetimeAgoDirective} from './datetime-ago.directive';
+import {ScrollableDirective} from './scrollable.directive';
+
+/* Services */
+import {AuthService} from './auth.service';
+import {AuthGuardService} from './auth-guard.service';
+import {RequestService} from './request.service';
+import {EventBrokerService} from './event-broker.service';
+
+/* Files */
+import {appRoutes} from './app.routes';
+import {environment} from '../environments/environment';
+
+/* Components */
 import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
 import {BlankComponent} from './blank/blank.component';
 import {ConversationComponent} from './conversation/conversation.component';
-
-import {appRoutes} from './app.routes';
+import {JoinUsComponent} from './join-us/join-us.component';
+import {ButtonComponent} from './button/button.component';
+import {NotFoundComponent} from './not-found/not-found.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
-import {LoginComponent} from './login/login.component';
 import {ConversationsComponent} from './conversations/conversations.component';
+import {LoginComponent} from './login/login.component';
 import {ContactsComponent} from './contacts/contacts.component';
 import {GroupsComponent} from './groups/groups.component';
 import {PlaceholderComponent} from './placeholder/placeholder.component';
-import {RequestService} from './request.service';
-import {EventBrokerService} from './event-broker.service';
-import {NotFoundComponent} from './not-found/not-found.component';
-import {AngularFirestoreModule} from 'angularfire2/firestore';
-import {AngularFireAuthModule} from 'angularfire2/auth';
-import {AngularFireModule} from 'angularfire2';
-import {environment} from '../environments/environment';
-import {DatetimeAgoDirective} from './datetime-ago.directive';
-import {ScrollableDirective} from './scrollable.directive';
-import {ObjNgForPipe} from './obj-ng-for.pipe';
-import {JoinUsComponent} from './join-us/join-us.component';
-import {ButtonComponent} from './button/button.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +85,9 @@ import {ButtonComponent} from './button/button.component';
   ],
   providers: [
     RequestService,
-    EventBrokerService
+    EventBrokerService,
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [
     AppComponent

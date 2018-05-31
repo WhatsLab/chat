@@ -2,6 +2,9 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EventBrokerService} from '../event-broker.service';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+import {Observable} from 'rxjs/Observable';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-join-us',
@@ -20,7 +23,10 @@ export class JoinUsComponent implements OnInit {
   email: FormControl;
   password: FormControl;
 
-  constructor(private _eventBroker: EventBrokerService, private _autn: AngularFireAuth) {
+  contacts: AngularFirestoreCollection<any>;
+  contact: Observable<any>;
+
+  constructor(private _eventBroker: EventBrokerService, private _auth: AngularFireAuth, private _afs: AngularFirestore, private router: Router) {
     this._eventBroker.emit<boolean>('is-logged', false);
 
     this.firstName = new FormControl('Eyad', [
@@ -37,6 +43,9 @@ export class JoinUsComponent implements OnInit {
       Validators.required,
       Validators.minLength(8)
     ]);
+
+
+    this.contacts = this._afs.collection('contacts');
   }
 
   ngOnInit() {
@@ -56,17 +65,34 @@ export class JoinUsComponent implements OnInit {
       console.log('joinUsForm is invalid');
       return;
     }
-    const {email, password} = this.joinUsForm.value;
+    const {email, password, name: {firstName: first, lastName: last}} = this.joinUsForm.value;
 
-    this._autn.auth.createUserWithEmailAndPassword(email, password).then(res => {
-      this.loading = false;
+    this._auth.auth.createUserWithEmailAndPassword(email, password).then(res => {
+
+      this._auth.auth.currentUser.updateProfile({displayName: `${first} ${last}`, photoURL: null});
+
+      this.contacts.add({
+        'uuid': res.uid,
+        'unreadCount': 0
+      }).then(contact => {
+        this.loading = false;
+        this.router.navigate(['main/blank']);
+      }).catch(error => {
+        this.loading = false;
+        console.log(error);
+        this._eventBroker.emit('open-snack-bar', {
+          'message': error.message
+        });
+      });
+
+
       console.log(res);
     }).catch(error => {
       this.loading = false;
+      console.log(error);
       this._eventBroker.emit('open-snack-bar', {
         'message': error.message
       });
-      console.log(error);
     });
   }
 }

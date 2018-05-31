@@ -14,8 +14,11 @@ import {AngularFireAuth} from 'angularfire2/auth';
 export class AppComponent implements OnDestroy {
   title = 'app';
   isLogged: boolean;
+  loggedUser: any;
+
   private _myEventListener;
   private _snackBarListener;
+  private _loggedUserListener;
 
   constructor(private _electronService: ElectronService, private router: Router, private _eventBroker: EventBrokerService,
               public snackBar: MatSnackBar, private _autn: AngularFireAuth) {
@@ -30,11 +33,15 @@ export class AppComponent implements OnDestroy {
         horizontalPosition: 'left'
       });
     });
+    this._loggedUserListener = _eventBroker.listen('logged-user', (data: any) => {
+      this.loggedUser = data;
+    });
   }
 
   public ngOnDestroy() {
     this._myEventListener.ignore();
     this._snackBarListener.ignore();
+    this._loggedUserListener.ignore();
   }
 
   changeLoggedStatus(isLogged: boolean): void {
