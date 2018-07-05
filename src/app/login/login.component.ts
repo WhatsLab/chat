@@ -28,32 +28,34 @@ export class LoginComponent implements OnInit {
     this._eventBroker.emit<boolean>('is-logged', false);
 
 
-    this.email = new FormControl('eyadm.fa@gmail.com', [
+    this.email = new FormControl('eyadm.fa@gmail.com4', [
       Validators.required,
       Validators.email
     ]);
-    this.password = new FormControl('1234567', [
+    this.password = new FormControl('12345678', [
       Validators.required,
       Validators.minLength(8)
     ]);
   }
 
-  login() {
+  async login() {
     this.loading = true;
 
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
 
     const {email, password} = this.loginForm.value;
 
-    this._auth.auth.signInWithEmailAndPassword(email, password).then(res => {
-      this.loading = false;
+    try {
+      const result = await this._auth.auth.signInWithEmailAndPassword(email, password);
+      // console.log(result);
+
       this.router.navigate(['main/blank']);
-    }).catch(error => {
-      this.loading = false;
+    } catch (error) {
       this._eventBroker.emit('open-snack-bar', {
         'message': error.message
       });
-    });
+    }
+    this.loading = false;
 
 
   }

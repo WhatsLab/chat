@@ -26,7 +26,8 @@ export class JoinUsComponent implements OnInit {
   contacts: AngularFirestoreCollection<any>;
   contact: Observable<any>;
 
-  constructor(private _eventBroker: EventBrokerService, private _auth: AngularFireAuth, private _afs: AngularFirestore, private router: Router) {
+  constructor(private _eventBroker: EventBrokerService, private _auth: AngularFireAuth,
+              private _afs: AngularFirestore, private router: Router) {
     this._eventBroker.emit<boolean>('is-logged', false);
 
     this.firstName = new FormControl('Eyad', [
@@ -59,7 +60,7 @@ export class JoinUsComponent implements OnInit {
     });
   }
 
-  joinUs() {
+  async joinUs() {
     this.loading = true;
     if (this.joinUsForm.invalid) {
       console.log('joinUsForm is invalid');
@@ -67,32 +68,38 @@ export class JoinUsComponent implements OnInit {
     }
     const {email, password, name: {firstName: first, lastName: last}} = this.joinUsForm.value;
 
-    this._auth.auth.createUserWithEmailAndPassword(email, password).then(res => {
+    try {
 
-      this._auth.auth.currentUser.updateProfile({displayName: `${first} ${last}`, photoURL: null});
+      const newUser = await this._auth.auth.createUserWithEmailAndPassword(email, password);
+      const currentUser = this._auth.auth.currentUser;
 
-      this.contacts.add({
-        'uuid': res.uid,
-        'unreadCount': 0
-      }).then(contact => {
-        this.loading = false;
-        this.router.navigate(['main/blank']);
-      }).catch(error => {
-        this.loading = false;
-        console.log(error);
-        this._eventBroker.emit('open-snack-bar', {
-          'message': error.message
-        });
+      const displayName = `${first} ${last}`;
+      const photoURL = null;
+      const unreadCount = 0;
+      const created = new Date();
+
+
+      currentUser.updateProfile({displayName, photoURL});
+
+      await this.contacts.doc(newUser.uid).set({
+        email,
+        photoURL,
+        displayName,
+        unreadCount,
+        created
       });
 
+      this.router.navigate(['main/blank']);
 
-      console.log(res);
-    }).catch(error => {
-      this.loading = false;
+    } catch (error) {
       console.log(error);
       this._eventBroker.emit('open-snack-bar', {
         'message': error.message
       });
-    });
+    }
+
+    this.loading = false;
+
+
   }
 }

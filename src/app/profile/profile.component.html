@@ -1,3 +1,26 @@
-<div fxFill fxLayout="column" fxLayoutAlign="space-between">
-  profile page
+<div fxFill fxLayout fxLayoutAlign="center start">
+  <div fxFlex="50" fxLayout="column">
+    <form [formGroup]="profileForm" novalidate (submit)="updateProfile()" name="profileForm" fxLayout="column">
+
+      <img [src]="avatar" alt="">
+
+      <input placeholder="Change your photo" accept="image/*" (change)="selectFile($event)" type="file"/>
+
+
+      <mat-form-field hideRequiredMarker>
+        <input type="text" formControlName="photoURL"/>
+        <input matInput placeholder="Your name" type="text" formControlName="displayName"/>
+        <mat-error *ngIf="displayName.invalid">
+          <div *ngIf="displayName.errors.required">Password is required</div>
+          <div *ngIf="displayName.errors.minlength">You must enter your name length at least
+            {{displayName.errors.minlength.requiredLength}} character
+          </div>
+        </mat-error>
+      </mat-form-field>
+      <div fxLayout>
+        <app-button fxFill [loading]="loading" [invalid]="profileForm.invalid" label="Save"
+                    loadingLabel="Updating"></app-button>
+      </div>
+    </form>
+  </div>
 </div>

@@ -16,4 +16,13 @@ export class AuthService {
       });
     });
   }
+
+  getUser() {
+    return new Promise((resolve, reject) => {
+      this._auth.authState.subscribe(res => {
+        const user = !res.isAnonymous ? res.providerData[0] : {};
+        resolve(user);
+      });
+    });
+  }
 }

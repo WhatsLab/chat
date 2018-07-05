@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit {
   };
   @Input() keyword: string;
   selectedIndex: number;
-  defaultTab = 'conversations';
+  defaultTab = 'contacts';
   selectedTab = this.defaultTab;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {

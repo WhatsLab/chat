@@ -3,15 +3,15 @@
     <app-placeholder *ngIf="page.loading" [data]="'contacts'"></app-placeholder>
     <app-not-found *ngIf="page.notFound" [type]="'contacts'"></app-not-found>
     <ul class="tab-list style-2">
-      <li fxLayout *ngFor="let contact of contacts; let first = first">
+      <li fxLayout *ngFor="let contact of contacts | async; let first = first">
         <a mat-button fxFlex [routerLink]="['/main/conversation/'+contact.id]" queryParamsHandling="merge" >
           <div class="item-content" fxLayout fxLayoutAlign="start center">
             <div class="image-wrapper">
-              <img [src]="contact.avatar" alt="">
+              <img appDefaultImg [src]="contact.photoURL" alt="">
             </div>
             <div class="item-info" fxFlex>
               <div class="basic">
-                <h3>{{contact.name}}</h3>
+                <h3>{{contact.displayName}}</h3>
                 <p>
                   <span></span>
                   <span>{{contact.email}}</span>
